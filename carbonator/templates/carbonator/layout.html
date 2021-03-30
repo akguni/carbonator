@@ -5,12 +5,36 @@
     <head>
         <link href="{% static 'carbonator/styles.css' %}" rel="stylesheet">
         <link rel="shortcut icon" type="image/png" href="{% static 'carbonator/favicon.ico' %}"/>
+        <script src="{% static 'carbonator/layout.js' %}" defer></script>
+        <title>Carbonator</title>
 
         {% block script %}
         {% endblock %}
     </head>
     <body>
+        <nav class="navbar">
+            <div class="brand-title">Carbonator</div>
+            <a href="#" class="toggle-button">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </a>
+            <div class="navbar-links">
+                <ul>
+                    <li><a href="#">Light</a></li>
+                    <li><a href="#">Heat</a></li>
+                    <li><a href="#">Move</a></li>
+                    
+                </ul>
+            </div>
+        
+        </nav>
         {% block body %}
         {% endblock %}
+        <div class = "footer">
+            <div class ="footer-content">Carbonator</div>
+            <div class ="footer-content">E-mail</div>
+            <div class ="footer-content">Disclaimer</div>
+        </div>
     </body>
 </html>
