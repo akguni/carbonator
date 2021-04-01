@@ -95,7 +95,11 @@ body {
 }
 
 .footer {
-  display: flex;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  display: flex;  
   justify-content: space-between;
   align-items: center;
   background-color: khaki;
@@ -110,24 +114,28 @@ body {
 
 .calculator-background {
   padding: 0;
-  margin: 0;
-  min-height: 20rem;
+  margin: 50px;
+  min-height: 20rem;  
 }
 
 .calculator {
   background: rgb(168, 196, 92);
   border: 2px solid black;
   border-radius: 10px;
-  margin: 100px;
+  width:fit-content;
+  margin: 0 auto;
   padding: 20px;
 }
 
 form {
   display: grid;
-  grid-template-columns: 300px 120px 50px;
+  grid-template-columns: 300px 120px auto;
   grid-gap: 10px;
+  align-items: start;
 }
 
-select {
-    width: 100%;
+select {  
 }
+
+.submit-button {
+  width: fit-content;
