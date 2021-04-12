@@ -9,3 +9,11 @@ class Appliance(models.Model):
     name = models.CharField(max_length=64)
     watts = models.DecimalField(max_digits=6, decimal_places=2)
     typicalDuration = models.IntegerField()
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "watts": self.watts,
+            "typicalDuration": self.typicalDuration
+        }

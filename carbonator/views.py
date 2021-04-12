@@ -9,6 +9,7 @@ from .models import Appliance
 def index(request):
     costs = {'cents': 31.5, 'co2e': 400, 'trees': 10}
     appliances = Appliance.objects.all()
+    appliances = [appliance.serialize() for appliance in appliances]
     return render(request, "carbonator/index.html", {
         "appliances": appliances,
         "costs": costs,
