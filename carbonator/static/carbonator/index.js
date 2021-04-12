@@ -16,7 +16,8 @@ function events() {
 function recalculate() {
     const appliance = document.getElementById("appliance");
     const duration = document.getElementById("duration");
-    const watts = parseFloat(appliance.options[appliance.selectedIndex].value);
+    const id = appliance.options[appliance.selectedIndex].value;
+    const watts = appliances.find(appliance => appliance.id == id).watts;
     const timemin = parseInt(duration.options[duration.selectedIndex].text);
     const timehr  = timemin / 60;
     const kWh = (watts * timehr) / 1000;    
@@ -33,7 +34,7 @@ function populateAppliances() {
     applianceList.innerHTML = "";
     appliances.forEach(appliance => {
         const option = document.createElement('option');
-        option.value = appliance.watts;
+        option.value = appliance.id;
         option.innerHTML = appliance.name;
         applianceList.append(option)        
     })    
