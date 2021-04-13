@@ -3,24 +3,26 @@ document.addEventListener('DOMContentLoaded', () => {
     costs = JSON.parse(document.getElementById('costs').textContent);
     appliances = JSON.parse(document.getElementById('appliances').textContent);
     populateAppliances();
+    initializeConsumption();
     events();
-    recalculate();
+    recalculate();    
 })
 
 function events() {
-    document.querySelectorAll("select").forEach(element => {
-        element.addEventListener('change', () => recalculate());
-    });
+    document.getElementById("appliance").addEventListener('change', () => {
+        initializeConsumption();
+        recalculate();
+    })
+    document.querySelectorAll(".variables").forEach(element => element.addEventListener('change', recalculate));
+    
 }
 
 function recalculate() {
-    const appliance = document.getElementById("appliance");
-    const duration = document.getElementById("duration");
-    const id = appliance.options[appliance.selectedIndex].value;
-    const watts = appliances.find(appliance => appliance.id == id).watts;
-    const timemin = parseInt(duration.options[duration.selectedIndex].text);
+    // read consumption and duration - calculate energy consumed
+    const watts = document.getElementById("consumption").value;
+    const timemin = document.getElementById("duration").value;
     const timehr  = timemin / 60;
-    const kWh = (watts * timehr) / 1000;    
+    const kWh = (watts * timehr) / 1000;
     const cents = document.getElementById("cents");
     cents.innerHTML = (kWh * costs.cents).toFixed(2);
     const co2e = document.getElementById("co2e");
@@ -37,5 +39,11 @@ function populateAppliances() {
         option.value = appliance.id;
         option.innerHTML = appliance.name;
         applianceList.append(option)        
-    })    
+    })
+}
+
+function initializeConsumption() {
+    const appliance = document.getElementById("appliance");
+    const id = appliance.options[appliance.selectedIndex].value;
+    document.getElementById("consumption").value = parseFloat(appliances.find(appliance => appliance.id == id).watts).toPrecision();    
 }

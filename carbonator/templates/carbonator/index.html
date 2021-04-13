@@ -9,38 +9,26 @@
 
 <div class="calculator-background">
     <div class="calculator">
-        <div id="lighting-form">
-            <div class="explanation">
-               By switching off
-            </div>
-            <select class="selection" id="appliance">
-           </select>
-            <div class="units"></div>
-            <div class="explanation">
-                For
-            </div>
-            <select class="selection" id="duration">
-                <option>1</option>
-                <option>5</option>
-                <option>10</option>
-                <option>30</option>
-                <option>60</option>
-
-            </select>
-            <div class="units">Minutes</div>
-            <div class="explanation">
-                You save: 
-            </div>
-                <!-- <input type="text" class="freetext" id="freetext-1" name="freetext-1" placeholder="1"> -->
-                <div class="result" id="cents"></div>
-                <div class="units">Cents</div>
+        <form id="lighting-form">
+            <div class="title">Savings Calculator</div>
+            <div class="explanation fb-item">Appliance</div>
+            <select class="selection fb-item" id="appliance"></select>
+            <div class="explanation fb-item">Consumption</div>
+            <input type="text" inputmode="decimal" class="variables  fb-item" id="consumption">
+            <div class="units fb-item">Watts</div> 
+            <div class="explanation fb-item">For</div>
+            <input type ="text" inputmode="decimal" class="variables  fb-item" id="duration" value="1">
+            <div class="units fb-item">Minutes</div>
+            <div class="explanation fb-item">Potential Saving</div>
+                <div class="result fb-item" id="cents"></div>
+                <div class="units fb-item">Cents</div>
                 <div></div>
-                <div class="result" id="co2e"></div>
-                <div class="units">grams of CO2e</div>
+                <div class="result fb-item" id="co2e"></div>
+                <div class="units fb-item">grams CO2e</div>
                 <div></div>
-                <div class="result" id="trees"></div>
-                <div class="units">Trees</div>
-        </div>
+                <div class="result fb-item" id="trees"></div>
+                <div class="units fb-item">Trees</div>
+        </form>
     </div>
 </div>
 {% endblock %}
