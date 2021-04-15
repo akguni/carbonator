@@ -13,8 +13,12 @@ function events() {
         initializeConsumption();
         recalculate();
     })
-    document.querySelectorAll(".variables").forEach(element => element.addEventListener('change', recalculate));
-    
+    document.querySelectorAll(".variables").forEach(element => {
+        element.addEventListener('input', recalculate);
+        element.addEventListener('keyup', key => {
+            if (key.keyCode === 13) element.blur()
+        })
+    })    
 }
 
 function recalculate() {
@@ -24,14 +28,28 @@ function recalculate() {
     const timehr  = timemin / 60;
     const kWh = (watts * timehr) / 1000;
     const cents = document.getElementById("cents");
-    cents.innerHTML = (kWh * costs.cents).toFixed(2);
+    cents.innerHTML = currency(kWh * costs.cents);
     const co2e = document.getElementById("co2e");
-    co2e.innerHTML = (kWh * costs.co2e).toFixed(2);
+    co2e.innerHTML = displayNumber(kWh * costs.co2e);
     const trees = document.getElementById("trees");
-    trees.innerHTML = (kWh * costs.trees).toFixed(2);
+    trees.innerHTML = displayNumber(kWh * costs.trees);
+    
+    const centsPerMonth = document.getElementById("cents-per-month");
+    centsPerMonth.innerHTML = currency(kWh * costs.cents * 30);
+    const co2ePerMonth = document.getElementById("co2e-per-month");
+    co2ePerMonth.innerHTML = displayNumber(kWh * costs.co2e * 30);
+    const treesPerMonth = document.getElementById("trees-per-month");
+    treesPerMonth.innerHTML = displayNumber(kWh * costs.trees * 30);
+    
+    const centsPerYear = document.getElementById("cents-per-year");
+    centsPerYear.innerHTML = currency(kWh * costs.cents * 365);
+    const co2ePerYear = document.getElementById("co2e-per-year");
+    co2ePerYear.innerHTML = displayNumber(kWh * costs.co2e * 365);
+    const treesPerYear = document.getElementById("trees-per-year");
+    treesPerYear.innerHTML = displayNumber(kWh * costs.trees * 365);
 }
 
-function populateAppliances() {
+function populateAppliances() {4
     const applianceList = document.getElementById("appliance");
     applianceList.innerHTML = "";
     appliances.forEach(appliance => {
@@ -46,4 +64,12 @@ function initializeConsumption() {
     const appliance = document.getElementById("appliance");
     const id = appliance.options[appliance.selectedIndex].value;
     document.getElementById("consumption").value = parseFloat(appliances.find(appliance => appliance.id == id).watts).toPrecision();    
+}
+
+function currency(number) {
+    return new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(number)
+}
+
+function displayNumber(number) {
+    return new Intl.NumberFormat('de-DE', { maximumFractionDigits: 2}).format(number)
 }
