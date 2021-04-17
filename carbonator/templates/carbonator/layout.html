@@ -22,10 +22,12 @@
             </a>
             <div class="navbar-links">
                 <ul>
-                    <li><a href="#">Light</a></li>
-                    <li><a href="#">Heat</a></li>
-                    <li><a href="#">Move</a></li>
-                    
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'register' %}">Register</a></li>
+                    {% endif %}
                 </ul>
             </div>
         
