@@ -1,15 +1,16 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
+from django.db.models import Sum
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
 from django.views.decorators.csrf import csrf_exempt
 
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 import json
 
-from .models import Appliance, User
+from .models import Appliance, Saving, User
 
 # Create your views here.
 
@@ -21,6 +22,14 @@ def index(request):
         "appliances": appliances,
         "costs": costs,
     })
+
+@login_required
+def profile(request):
+    total_saving = Saving.objects.filter(saver=request.user).aggregate(Sum('energySaved'))
+    return render(request, "carbonator/profile.html", {
+        "total_saving": total_saving
+    })
+
 
 
 
@@ -38,6 +47,7 @@ def login_view(request):
         if user is not None:
             login(request, user)
             return HttpResponseRedirect(reverse("index"))
+
         else:
             return render(request, "carbonator/login.html", {
                 "message": "Invalid username and/or password."
@@ -47,7 +57,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return HttpResponseRedirect(reverse("index"))
+    return redirect('index')
 
 def register(request):
     if request.method == "POST":
@@ -71,6 +81,7 @@ def register(request):
                 "message": "Username already taken."
             })
         login(request, user)
-        return HttpResponseRedirect(reverse("index"))
+        # return HttpResponseRedirect(reverse("index"))
+        return redirect('index')
     else:
         return render(request, "carbonator/register.html")

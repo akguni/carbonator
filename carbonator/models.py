@@ -1,13 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.db.models.deletion import CASCADE
-
-# Create your models here.
-# class CostPerKwh(models.Model):
-#     money = models.DecimalField(max_digits=4, decimal_places=2)
-#     carbon = models.DecimalField(max_digits=4, decimal_places=2)
-#     trees = models.DecimalField(max_digits=4, decimal_places=4)
-
 class User(AbstractUser):
     pass
 class Appliance(models.Model):
@@ -21,4 +14,19 @@ class Appliance(models.Model):
             "name": self.name,
             "watts": self.watts,
             "typicalDuration": self.typicalDuration
+        }
+
+class Saving(models.Model):
+    saver = models.ForeignKey("User", on_delete=models.CASCADE, related_name="savings")
+    timestamp=models.DateTimeField(auto_now_add=True)
+    appliance=models.ForeignKey("Appliance", on_delete=models.PROTECT)
+    energySaved=models.DecimalField(max_digits=6, decimal_places=2)
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "saver": self.saver,
+            "timestamp": self.timestamp.strftime("%b %-d %Y, %-I:%M %p"),
+            "appliance": self.appliance,
+            "energySaved": self.energySaved
         }

@@ -2,25 +2,12 @@
 {% load static %}
 
 {% block body %}
-<!--line below allows javascript to read current user id-->
-{{ request.user.id|json_script:"userId" }}
-    <div class="container p-3 my-3 border">
-        <h5 id="userPk" data-data="{{ userPk }}" >Profile: {{ username }}</h5>
-        <div id="follow"></div>
-        <div id="profile-view">
-        </div>
-    </div>
-    <div class="container p-3 my-3 border">
-        <h5>All Posts by {{ username }}:</h5>        
-        <div id="allposts-view">
-        </div>
-    </div>
-    <div id="pagination-view">
-    </div>
+
+Hello, {{ user.username }}.
+
+You have so far saved {{ total_saving.energySaved__sum }} kwH.
     
 {% endblock %}
 
 {% block script %}
-    <script src="{% static 'network/functions.js' %}"></script>
-    <script src="{% static 'network/profile.js' %}"></script>
 {% endblock %}
