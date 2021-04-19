@@ -9,15 +9,16 @@
 
 <div class="calculator-background">
     <div class="input-box">
-        <form id="lighting-form">
+        <form action="{% url 'bank' %}" id="lighting-form" method="POST">
+            {% csrf_token %}
             <div class="title">Savings Calculator</div>
             <div class="explanation">Appliance</div>
-            <select class="selection" id="appliance"></select>
+            <select class="selection" id="appliance" name="appliance"></select>
             <div class="explanation">Consumption</div>
-            <input type="text" inputmode="decimal" class="variables " id="consumption">
+            <input type="text" inputmode="decimal" class="variables " id="consumption" name="consumption">
             <div class="units">Watts</div>
             <div class="explanation">For</div>
-            <input type ="text" inputmode="decimal" class="variables " id="duration" value="1">
+            <input type ="text" inputmode="decimal" class="variables " id="duration" name="duration" value="1">
             <div class="units">Minutes</div>
             <div class="title"> Potential</div>
             <div class="header">Money</div>
@@ -36,6 +37,7 @@
             <div class="result" id="co2e-per-year"></div>
             <div class="result" id="trees-per-year"></div>
             <div class="frequency">/ Year</div>
+            <input type="submit" class="button" value="Bank!">
         </form>
     </div>
 </div>
