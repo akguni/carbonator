@@ -31,7 +31,18 @@ def profile(request):
     })
 
 
-
+@login_required
+def bank(request):
+    if request.method == "POST":
+        form = request.POST
+        kwh = float(form["consumption"]) * float(form["duration"])
+        saving = Saving(
+            saver=request.user,
+            appliance=Appliance.objects.get(id=form["appliance"]),
+            energySaved=kwh
+        )
+        saving.save()
+        return redirect('index')
 
 # login, logout and register functions below this line
 
