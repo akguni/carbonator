@@ -2,14 +2,14 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.db.models import Sum
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 
 from django.views.decorators.csrf import csrf_exempt
 
 from django.shortcuts import redirect, render
 import json
-
+import time 
 from .models import Appliance, Saving, User
 
 # Create your views here.
@@ -25,10 +25,29 @@ def index(request):
 
 @login_required
 def profile(request):
-    total_saving = Saving.objects.filter(saver=request.user).aggregate(Sum('energySaved'))
+    savings = Saving.objects.filter(saver=request.user)
+    total_saving = savings.aggregate(Sum('energySaved'))
+
     return render(request, "carbonator/profile.html", {
-        "total_saving": total_saving
+        "savings": savings,
+        "total_saving": total_saving,
+        "n": range(100),
     })
+
+def savings(request):
+    # Get start and end points
+    start = int(request.GET.get("start") or 0)
+    end = int(request.GET.get("end") or (start + 9))
+
+    savings = Saving.objects.filter(saver=request.user)
+    savings = [saving.serialize() for saving in savings]
+    
+    time.sleep(1)
+
+    return JsonResponse({
+        "savings": savings,
+    })
+
 
 
 @login_required
@@ -43,6 +62,13 @@ def bank(request):
         )
         saving.save()
         return redirect('index')
+
+@csrf_exempt
+def delete(request, id):
+    if request.method != "DELETE":
+        return JsonResponse({"error": "DELETE request required."}, status=400)
+    print(id)
+    return JsonResponse({ "id": id })
 
 # login, logout and register functions below this line
 

@@ -61,6 +61,13 @@ padding: 1px 2px;
   grid-column: span 2;
 }
 
+.saving {
+  border: 1px solid black;
+  margin: 2px;
+  padding: 2px;
+}
+
+
 @media (min-width: 600px) {
 * {font-size: medium;}
 
@@ -77,3 +84,4 @@ padding: 1px 2px;
 
 }
 
+/* https://css-tricks.com/snippets/css/a-guide-to-flexbox/#basics-and-terminology */

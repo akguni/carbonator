@@ -5,6 +5,10 @@
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
   margin: 0;
   padding: 0;
   background: linear-gradient(to right, orange, rgba(255, 85, 79, 0.952));
@@ -19,6 +23,9 @@ body {
 }
 
 .brand-title {
+  color: black;
+  display: block;
+  text-decoration: none;
   font-size: 1.5rem;
   margin: 0.5rem;
 }
@@ -96,9 +103,8 @@ body {
 }
 
 .footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
+  flex: 0 0 50px;
+  margin-top: auto;
   width: 100%;
   display: flex;  
   justify-content: space-between;
