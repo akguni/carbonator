@@ -33,16 +33,16 @@ function addSaving(contents) {
     deleteButton.className = 'delete';
     deleteButton.id = contents.id;
     deleteButton.innerHTML = "Delete";
-    deleteButton.addEventListener('click', event => deleteSaving(event.target.id));
+    deleteButton.addEventListener('click', event => deleteSaving(event.target));
     saving.append(deleteButton);
     document.querySelector('#savings').append(saving);
 };
 
-function deleteSaving(id) {
-    fetch('delete/' + id, {
+function deleteSaving(target) {
+    
+    fetch('delete/' + target.id, {
         method: 'DELETE',
     })
-    .then(outcome => outcome.json())
-    .then(outcome => console.log(outcome.id))
+    .then(target.parentElement.remove())
 }
 

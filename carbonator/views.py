@@ -67,7 +67,10 @@ def bank(request):
 def delete(request, id):
     if request.method != "DELETE":
         return JsonResponse({"error": "DELETE request required."}, status=400)
-    print(id)
+    
+    # saving = Saving.objects.get(id=id)
+    # saving.delete()
+
     return JsonResponse({ "id": id })
 
 # login, logout and register functions below this line
