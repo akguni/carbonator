@@ -7,20 +7,15 @@ Hello, {{ user.username }}.
 
 You have so far saved {{ total_saving.energySaved__sum }} kwH.
 
-<!-- <ul>Savings
-    {% for saving in savings %}
-        <li>{{ saving.timestamp}}</li>
-        <li>{{ saving.appliance.name }}</li>
-        <li>{{ saving.energySaved }}</li>
-    {% endfor %}
-</ul> -->
-
-<div id="savings"></div>
-
-<div style="display: block;">
-{% for i in n %}
-    <p>{{ i }}</p>
-{% endfor %}
+<div id="savings">
+    <table id="savings-table">
+        <tr>
+            <th>Appliance</th>
+            <th>Saving (kwh)</th>
+            <th>Date</th>
+            <th></th>
+        </tr>
+    </table>
 </div>
 {% endblock %}
 {% block script %}

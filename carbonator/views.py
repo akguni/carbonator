@@ -31,21 +31,23 @@ def profile(request):
     return render(request, "carbonator/profile.html", {
         "savings": savings,
         "total_saving": total_saving,
-        "n": range(100),
     })
 
 def savings(request):
+
+    savings = Saving.objects.filter(saver=request.user)
+    numberSavings = len(savings)
+
     # Get start and end points
     start = int(request.GET.get("start") or 0)
     end = int(request.GET.get("end") or (start + 9))
 
-    savings = Saving.objects.filter(saver=request.user)
+    savings.order_by('-energySaved')[start:end]
     savings = [saving.serialize() for saving in savings]
     
-    time.sleep(1)
-
     return JsonResponse({
         "savings": savings,
+        "numberSavings": numberSavings,
     })
 
 
