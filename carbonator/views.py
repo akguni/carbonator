@@ -39,10 +39,10 @@ def savings(request):
     numberSavings = len(savings)
 
     # Get start and end points
-    start = int(request.GET.get("start") or 0)
-    end = int(request.GET.get("end") or (start + 9))
+    start = int(request.GET.get("start"))
+    end = int(request.GET.get("end")) + 1
 
-    savings.order_by('-energySaved')[start:end]
+    savings = savings.order_by('-energySaved')[start:end]
     savings = [saving.serialize() for saving in savings]
     
     return JsonResponse({

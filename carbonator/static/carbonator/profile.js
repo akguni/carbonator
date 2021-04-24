@@ -43,7 +43,7 @@ function addSaving(contents) {
     deleteButton = document.createElement('button');
     deleteButton.className = 'delete';
     deleteButton.id = contents.id;
-    deleteButton.innerHTML = "Delete";
+    deleteButton.innerHTML = String.fromCodePoint(0x1F5D1);
     deleteButton.addEventListener('click', event => deleteSaving(event.target));
     buttonCell.append(deleteButton);
     saving.append(appliance, kwh, date, buttonCell)
