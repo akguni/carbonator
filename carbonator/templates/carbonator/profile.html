@@ -3,19 +3,20 @@
 
 {% block body %}
 
-Hello, {{ user.username }}.
+<div id="system-message"></div>
 
-You have so far saved {{ total_saving.energySaved__sum }} kwH.
-
+<div>Hello, {{ user.username }}. You have so far saved 
+    <span id="total-saving">{{ total_saving.energySaved__sum }}</span> kwH.
+</div>
 <div class="input-box" id="savings">
-    <table id="savings-table">
-        <tr>
-            <th>Appliance</th>
-            <th>Saving (kwh)</th>
-            <th>Date</th>
-            <th></th>
-        </tr>
-    </table>
+    <div id="savings-table">
+        <div class="saving">
+            <div class="appliance-column header">Appliance</div>
+            <div class="kwh-column header">Saving (kwh)</div>
+            <div class="date-column header">Date</div>
+            <div></div>
+        </div>
+    </div>
 </div>
 {% endblock %}
 {% block script %}

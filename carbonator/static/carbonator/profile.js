@@ -1,10 +1,11 @@
-
 // Setting up scrolling view
 let counter = 0;
-const quantity = 10;
+const quantity = 20;
 
 // Number of saving records in database
 let numberSavings = 0;
+
+document.addEventListener('DOMContentLoaded', retrieveNext());
 
 // Event listener for scrolling
 window.onscroll = () => {
@@ -14,7 +15,16 @@ window.onscroll = () => {
     }
 };
 
-retrieveNext();
+document.addEventListener('click', event => {
+    const element = event.target;
+    if (element.className === 'delete') {
+        const remove = element.parentElement.parentElement
+        remove.style.animationPlayState = 'running';
+        remove.addEventListener('animationend', () =>  {
+            remove.remove();
+            deleteSaving(event.target);                
+        })};
+    });
 
 function retrieveNext() {
     if (counter > numberSavings) {
@@ -32,19 +42,23 @@ function retrieveNext() {
 };
 
 function addSaving(contents) {
-    const saving = document.createElement('tr');
-    const appliance = document.createElement('td');
+    const saving = document.createElement('div');
+    saving.classList.add('saving');
+    const appliance = document.createElement('div');
+    appliance.classList.add('appliance-column');
     appliance.innerHTML = contents.appliance;
-    const kwh = document.createElement('td');
+    const kwh = document.createElement('div');
+    kwh.classList.add('kwh-column')
     kwh.innerHTML = displayNumber(contents.energySaved);
-    const date = document.createElement('td');
+    const date = document.createElement('div');
+    date.classList.add('date-column');
     date.innerHTML = displayDate(new Date(contents.timestamp));
-    const buttonCell = document.createElement('td')
+    const buttonCell = document.createElement('div');
+    buttonCell.classList.add('delete-column');
     deleteButton = document.createElement('button');
     deleteButton.className = 'delete';
     deleteButton.id = contents.id;
     deleteButton.innerHTML = String.fromCodePoint(0x1F5D1);
-    deleteButton.addEventListener('click', event => deleteSaving(event.target));
     buttonCell.append(deleteButton);
     saving.append(appliance, kwh, date, buttonCell)
     document.querySelector('#savings-table').append(saving);
@@ -54,8 +68,17 @@ function addSaving(contents) {
 function deleteSaving(target) {
     
     fetch('delete/' + target.id, {
-        method: 'DELETE',
+        method: 'PUT',
     })
-    .then(target.parentElement.parentElement.remove())
+    .then(response => response.json())
+    .then(response  => {
+        const saved = document.getElementById('total-saving');
+        totalSaving = response.total_saving.energySaved__sum; 
+        const message = document.getElementById('system-message');
+        const undo = document.createElement('a');
+        undo.href = '/undo/' + target.id;
+        undo.innerText = 'Undo'
+        message.innerHTML = "Saving deleted. ";
+        message.append(undo);         
+    })
 }
-

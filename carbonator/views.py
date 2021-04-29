@@ -25,7 +25,7 @@ def index(request):
 
 @login_required
 def profile(request):
-    savings = Saving.objects.filter(saver=request.user)
+    savings = Saving.objects.filter(saver=request.user).filter(deleteFlag=False)
     total_saving = savings.aggregate(Sum('energySaved'))
 
     return render(request, "carbonator/profile.html", {
@@ -36,7 +36,11 @@ def profile(request):
 def savings(request):
 
     savings = Saving.objects.filter(saver=request.user)
+
+    # clean up records flagged for deletion
+    savings.filter(deleteFlag=True).delete()
     numberSavings = len(savings)
+ 
 
     # Get start and end points
     start = int(request.GET.get("start"))
@@ -67,13 +71,29 @@ def bank(request):
 
 @csrf_exempt
 def delete(request, id):
-    if request.method != "DELETE":
-        return JsonResponse({"error": "DELETE request required."}, status=400)
+    if request.method != "PUT":
+        return JsonResponse({"error": "PUT request required."}, status=400)
     
-    # saving = Saving.objects.get(id=id)
-    # saving.delete()
+    saving = Saving.objects.get(id=id)
+    saving.deleteFlag = True
+    saving.save()
 
-    return JsonResponse({ "id": id })
+    savings = Saving.objects.filter(saver=request.user).filter(deleteFlag=False)
+    total_saving = savings.aggregate(Sum('energySaved'))
+
+    return JsonResponse({
+        "id": id,
+        "total_saving": total_saving,
+        })
+
+
+@csrf_exempt
+def undo(request, id):
+    saving = Saving.objects.get(id=id)
+    saving.deleteFlag = False
+    saving.save()
+
+    return redirect('profile')
 
 # login, logout and register functions below this line
 

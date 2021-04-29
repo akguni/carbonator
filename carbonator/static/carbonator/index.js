@@ -56,7 +56,7 @@ function populateAppliances() {
         const option = document.createElement('option');
         option.value = appliance.id;
         option.innerHTML = appliance.name;
-        applianceList.append(option)        
+        applianceList.append(option);        
     })
 }
 
@@ -71,5 +71,5 @@ function initializeConsumption() {
 // }
 
 // function displayNumber(number) {
-//     return new Intl.NumberFormat('de-DE', { maximumFractionDigits: 2}).format(number)
+//     return new Intl.NumberFormat('de-DE', { maximumFractionDigits: 2 }).format(number)
 // }
