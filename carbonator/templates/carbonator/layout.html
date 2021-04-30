@@ -24,6 +24,7 @@
             </a>
             <div class="navbar-links">
                 <ul>
+                    <li><a href="{% url 'halloffame' %}">Hall of Fame</a></li>
                     {% if user.is_authenticated %}
                     <li><a href="{% url 'profile' %}">{{ user.username }}</a></li>
                     <li><a href="{% url 'logout' %}">Logout</a></li>

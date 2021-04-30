@@ -55,6 +55,15 @@ def savings(request):
     })
 
 
+def halloffame(request):
+    
+
+    halloffame = User.objects.annotate(Sum('savings__energySaved')).order_by('-savings__energySaved__sum')
+
+    return render(request, "carbonator/halloffame.html", {
+        "halloffame": halloffame,
+    })
+
 
 @login_required
 def bank(request):
@@ -88,7 +97,7 @@ def delete(request, id):
 
 
 @csrf_exempt
-def undo(request, id):
+def undo(request, id):    
     saving = Saving.objects.get(id=id)
     saving.deleteFlag = False
     saving.save()

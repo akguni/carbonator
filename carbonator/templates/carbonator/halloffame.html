@@ -1,0 +1,28 @@
+{% extends "carbonator/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+<div id="system-message"></div>
+
+<div>Top Energy Savers</div>
+<div class="input-box" id="savings">
+    <div id="savings-table">
+        <div class="saving">
+            <div class="rank-column header">Rank</div>
+            <div class="saver-column header">User</div>
+            <div class="kwh-column header">Saving (kwh)</div>
+        </div>
+        {% for user in halloffame %}
+        <div class="saving">
+            <div class="rank-column">{{ forloop.counter }}</div>
+            <div class="saver-column">{{ user.username }}</div>
+            <div class="kwh-column">{{ user.savings__energySaved__sum }}</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+    <!-- <script src="{% static 'carbonator/profile.js' %}" defer></script> -->
+{% endblock %}

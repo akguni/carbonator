@@ -97,7 +97,7 @@ input {
   clear: both;
 }
 
-.appliance-column, .kwh-column, .date-column, .delete-column {
+.appliance-column, .kwh-column, .date-column, .delete-column, .rank-column, .saver-column {
   float: left;
   width: 25%;
 }
