@@ -35,5 +35,6 @@ class Saving(models.Model):
             "saver": self.saver.id,
             "timestamp": self.timestamp.strftime("%b %-d %Y, %-I:%M %p"),
             "appliance": self.appliance.name,
-            "energySaved": self.energySaved
+            "energySaved": self.energySaved,
+            "deleteFlag": self.deleteFlag
         }

@@ -17,12 +17,11 @@
         <div class="saving">
             <div class="rank-column">{{ forloop.counter }}</div>
             <div class="saver-column">{{ user.username }}</div>
-            <div class="kwh-column">{{ user.savings__energySaved__sum }}</div>
+            <div class="kwh-column">{{ user.totalSaved }}</div>
         </div>
         {% endfor %}
     </div>
 </div>
 {% endblock %}
 {% block script %}
-    <!-- <script src="{% static 'carbonator/profile.js' %}" defer></script> -->
 {% endblock %}

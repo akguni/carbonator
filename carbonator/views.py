@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
-from django.db.models import Sum
+from django.db.models import Q, Sum
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 
@@ -25,7 +25,7 @@ def index(request):
 
 @login_required
 def profile(request):
-    savings = Saving.objects.filter(saver=request.user).filter(deleteFlag=False)
+    savings = Saving.objects.filter(saver=request.user).exclude(deleteFlag=True)
     total_saving = savings.aggregate(Sum('energySaved'))
 
     return render(request, "carbonator/profile.html", {
@@ -56,9 +56,10 @@ def savings(request):
 
 
 def halloffame(request):
-    
 
-    halloffame = User.objects.annotate(Sum('savings__energySaved')).order_by('-savings__energySaved__sum')
+    savings = Saving.objects.exclude(deleteFlag__exact=True)    
+
+    halloffame = User.objects.exclude(is_superuser=True).annotate(totalSaved=Sum('savings__energySaved', filter=Q(savings__deleteFlag__exact=False))).order_by('-totalSaved')
 
     return render(request, "carbonator/halloffame.html", {
         "halloffame": halloffame,
@@ -87,7 +88,7 @@ def delete(request, id):
     saving.deleteFlag = True
     saving.save()
 
-    savings = Saving.objects.filter(saver=request.user).filter(deleteFlag=False)
+    savings = Saving.objects.filter(saver= request.user).exclude(deleteFlag__exact=True)
     total_saving = savings.aggregate(Sum('energySaved'))
 
     return JsonResponse({

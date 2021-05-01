@@ -73,11 +73,12 @@ function deleteSaving(target) {
     .then(response => response.json())
     .then(response  => {
         const saved = document.getElementById('total-saving');
-        totalSaving = response.total_saving.energySaved__sum; 
+        totalSaving = response.total_saving.energySaved__sum;
+        saved.innerText = displayNumber(totalSaving); 
         const message = document.getElementById('system-message');
         const undo = document.createElement('a');
         undo.href = '/undo/' + target.id;
-        undo.innerText = 'Undo'
+        undo.innerText = 'Undo';
         message.innerHTML = "Saving deleted. ";
         message.append(undo);         
     })
