@@ -1,8 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.db.models.deletion import CASCADE
+
 class User(AbstractUser):
     pass
+
 class Appliance(models.Model):
     name = models.CharField(max_length=64)
     watts = models.DecimalField(max_digits=6, decimal_places=2)
@@ -54,4 +56,3 @@ class Cost(models.Model):
             "co2e": self.co2e,
             "trees": self.trees,
         }
-

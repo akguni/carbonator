@@ -63,13 +63,6 @@ function populateAppliances() {
 function initializeConsumption() {
     const appliance = document.getElementById("appliance");
     const id = appliance.options[appliance.selectedIndex].value;
-    document.getElementById("consumption").value = parseFloat(appliances.find(appliance => appliance.id == id).watts).toPrecision();    
+    document.getElementById("consumption").value = parseFloat(appliances.find(appliance => appliance.id == id).watts).toPrecision();
+    document.getElementById("duration").value = parseFloat(appliances.find(appliance => appliance.id == id).typicalDuration).toPrecision();
 }
-
-// function currency(number) {
-//     return new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(number)
-// }
-
-// function displayNumber(number) {
-//     return new Intl.NumberFormat('de-DE', { maximumFractionDigits: 2 }).format(number)
-// }

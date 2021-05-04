@@ -24,6 +24,7 @@ def index(request):
         "costs": costs,
     })
 
+
 @login_required
 def profile(request):
     savings = Saving.objects.filter(saver=request.user).exclude(deleteFlag=True)
