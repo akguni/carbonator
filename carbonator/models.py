@@ -38,3 +38,20 @@ class Saving(models.Model):
             "energySaved": self.energySaved,
             "deleteFlag": self.deleteFlag
         }
+
+class Cost(models.Model):
+    user = models.OneToOneField("User", on_delete=models.CASCADE, related_name="costs")
+    money = models.DecimalField(max_digits=8, decimal_places=4)
+    moneyUnit = models.CharField(max_length=16)
+    co2e = models.DecimalField(max_digits=12, decimal_places=2)
+    trees = models.DecimalField(max_digits=6, decimal_places=2)
+
+    def serialize(self):
+        return {
+            "user": self.user.id,            
+            "money": self.money,
+            "moneyUnit": self.moneyUnit,
+            "co2e": self.co2e,
+            "trees": self.trees,
+        }
+

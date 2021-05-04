@@ -27,22 +27,22 @@ function recalculate() {
     const timemin = document.getElementById("duration").value;
     const timehr  = timemin / 60;
     const kWh = (watts * timehr) / 1000;
-    const cents = document.getElementById("cents");
-    cents.innerHTML = displayCurrency(kWh * costs.cents);
+    const money = document.getElementById("cents");
+    money.innerHTML = displayCurrency(kWh * costs.money);
     const co2e = document.getElementById("co2e");
     co2e.innerHTML = displayNumber(kWh * costs.co2e);
     const trees = document.getElementById("trees");
     trees.innerHTML = displayNumber(kWh * costs.trees);
     
-    const centsPerMonth = document.getElementById("cents-per-month");
-    centsPerMonth.innerHTML = displayCurrency(kWh * costs.cents * 30);
+    const moneyPerMonth = document.getElementById("cents-per-month");
+    moneyPerMonth.innerHTML = displayCurrency(kWh * costs.money * 30);
     const co2ePerMonth = document.getElementById("co2e-per-month");
     co2ePerMonth.innerHTML = displayNumber(kWh * costs.co2e * 30);
     const treesPerMonth = document.getElementById("trees-per-month");
     treesPerMonth.innerHTML = displayNumber(kWh * costs.trees * 30);
     
-    const centsPerYear = document.getElementById("cents-per-year");
-    centsPerYear.innerHTML = displayCurrency(kWh * costs.cents * 365);
+    const moneyPerYear = document.getElementById("cents-per-year");
+    moneyPerYear.innerHTML = displayCurrency(kWh * costs.money * 365);
     const co2ePerYear = document.getElementById("co2e-per-year");
     co2ePerYear.innerHTML = displayNumber(kWh * costs.co2e * 365);
     const treesPerYear = document.getElementById("trees-per-year");

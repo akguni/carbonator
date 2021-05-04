@@ -3,6 +3,8 @@
 
 {% block body %}
 
+{% load humanize %}
+
 <div id="system-message"></div>
 
 <div>Top Energy Savers</div>
@@ -17,7 +19,7 @@
         <div class="saving">
             <div class="rank-column">{{ forloop.counter }}</div>
             <div class="saver-column">{{ user.username }}</div>
-            <div class="kwh-column">{{ user.totalSaved }}</div>
+            <div class="kwh-column">{{ user.totalSaved|intcomma }}</div>
         </div>
         {% endfor %}
     </div>

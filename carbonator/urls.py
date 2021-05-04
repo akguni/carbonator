@@ -12,4 +12,5 @@ urlpatterns = [
     path("delete/<int:id>", views.delete, name="delete"),
     path("undo/<int:id>", views.undo, name="undo"),
     path("halloffame", views.halloffame, name="halloffame"),
+    path("settings", views.settings, name="settings"),
 ]

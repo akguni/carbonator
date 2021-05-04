@@ -1,5 +1,5 @@
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, default_app_config, login, logout
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.db import IntegrityError
 from django.db.models import Q, Sum
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
@@ -10,12 +10,13 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import redirect, render
 import json
 import time 
-from .models import Appliance, Saving, User
+from .models import Appliance, Saving, User, Cost
 
 # Create your views here.
 
 def index(request):
-    costs = {'cents': 0.315, 'co2e': 400, 'trees': 10}
+    costs = setting_check(request.user)
+    # costs = {'cents': 0.315, 'co2e': 400, 'trees': 10}
     appliances = Appliance.objects.all()
     appliances = [appliance.serialize() for appliance in appliances]
     return render(request, "carbonator/index.html", {
@@ -57,8 +58,7 @@ def savings(request):
 
 def halloffame(request):
 
-    savings = Saving.objects.exclude(deleteFlag__exact=True)    
-
+    savings = Saving.objects.exclude(deleteFlag__exact=True) 
     halloffame = User.objects.exclude(is_superuser=True).annotate(totalSaved=Sum('savings__energySaved', filter=Q(savings__deleteFlag__exact=False))).order_by('-totalSaved')
 
     return render(request, "carbonator/halloffame.html", {
@@ -104,6 +104,48 @@ def undo(request, id):
     saving.save()
 
     return redirect('profile')
+
+
+@csrf_exempt
+@login_required
+def settings(request):
+    if request.method != "POST":
+        settings = setting_check(request.user)
+        return render(request, "carbonator/settings.html", {
+            "settings": settings
+        })
+    
+    settings = Cost.objects.get(user=request.user)
+    
+    if settings is None:
+        settings.user = request.user
+
+    settings.money = float(request.POST["money"])
+    settings.moneyUnit = request.POST["money-unit"]
+    settings.co2e = float(request.POST["co2e"])
+    settings.trees = float(request.POST["trees"])
+    settings.save()
+
+    return render(request, "carbonator/settings.html", {
+            "settings": settings
+        })
+
+def setting_check(user):
+
+    if user.is_authenticated:
+        costs = Cost.objects.filter(user=user)
+        if costs.count() == 1:
+            settings = costs[0].serialize()
+            return settings
+
+    settings = {
+        'money': 0.315,
+        'moneyUnit': 'Euro',
+        'co2e': 400,
+        'trees': 10
+    }
+    
+    return settings
 
 # login, logout and register functions below this line
 
