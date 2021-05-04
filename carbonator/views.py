@@ -16,7 +16,6 @@ from .models import Appliance, Saving, User, Cost
 
 def index(request):
     costs = setting_check(request.user)
-    # costs = {'cents': 0.315, 'co2e': 400, 'trees': 10}
     appliances = Appliance.objects.all()
     appliances = [appliance.serialize() for appliance in appliances]
     return render(request, "carbonator/index.html", {
@@ -70,15 +69,16 @@ def halloffame(request):
 @login_required
 def bank(request):
     if request.method == "POST":
-        form = request.POST
-        kwh = float(form["consumption"]) * float(form["duration"])
+        data = json.loads(request.body)
+        kWh = data.get("kWh")
+        appliance = data.get("appliance")
         saving = Saving(
             saver=request.user,
-            appliance=Appliance.objects.get(id=form["appliance"]),
-            energySaved=kwh
+            appliance=Appliance.objects.get(id=appliance),
+            energySaved=kWh
         )
         saving.save()
-        return redirect('index')
+        return JsonResponse({"message": "OK"}, status=201)
 
 @csrf_exempt
 def delete(request, id):

@@ -17,9 +17,9 @@
         </div>
         {% for user in halloffame %}
         <div class="saving">
-            <div class="rank-column">{{ forloop.counter }}</div>
+            <div class="rank-column">{{ forloop.counter }} - </div>
             <div class="saver-column">{{ user.username }}</div>
-            <div class="kwh-column">{{ user.totalSaved|intcomma }}</div>
+            <div class="kwh-column">{{ user.totalSaved|floatformat:"0"|intcomma }}</div>
         </div>
         {% endfor %}
     </div>

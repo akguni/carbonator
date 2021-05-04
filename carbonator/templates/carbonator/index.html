@@ -6,6 +6,7 @@
 <!-- passing consumption data etc to javascript -->
 {{ appliances|json_script:"appliances" }}
 {{ costs|json_script:"costs" }}
+{{ request.user.username|json_script:"username" }}
 
 <div class="calculator-background">
     <div class="input-box">
