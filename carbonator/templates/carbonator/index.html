@@ -12,7 +12,7 @@
     <div class="input-box">
         <form action="{% url 'bank' %}" id="lighting-form" method="POST">
             {% csrf_token %}
-            <div class="title">Savings Calculator</div>
+            <div class="title">Switch Off</div>
             <div class="explanation">Appliance</div>
             <select class="selection" id="appliance" name="appliance"></select>
             <div class="explanation">Consumption</div>
@@ -21,25 +21,15 @@
             <div class="explanation">For</div>
             <input type ="text" inputmode="decimal" class="variables" id="duration" name="duration">
             <div class="units">Minutes</div>
-            <div class="title"> Potential</div>
-            <div class="header">Money</div>
+            <div class="title">You Save</div>
+            <div class="header">{{ costs.moneyUnit }}</div>
             <div class="header">grams CO2e</div>
             <div class="header">Trees</div>
-            <div class="frequency"></div>
-            <div class="result" id="cents"></div>
-            <div class="result" id="co2e"></div>
+            <div class="result" id="kwh"></div>
+            <div class="result" id="money"></div>
             <div class="result" id="trees"></div>
-            <div class="frequency">Once</div>
-            <div class="result" id="cents-per-month"></div>
-            <div class="result" id="co2e-per-month"></div>
-            <div class="result" id="trees-per-month"></div>
-            <div class="frequency">/ Month</div>
-            <div class="result" id="cents-per-year"></div>
-            <div class="result" id="co2e-per-year"></div>
-            <div class="result" id="trees-per-year"></div>
-            <div class="frequency">/ Year</div>
             {% if user.is_authenticated %}
-            <input type="submit" class="button" value="Bank!">
+            <input type="submit" class="button" id="bank" value="Bank!">
             {% endif %}
         </form>
     </div>

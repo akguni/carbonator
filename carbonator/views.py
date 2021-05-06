@@ -9,6 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from django.shortcuts import redirect, render
 import json
+import random
 import time 
 from .models import Appliance, Saving, User, Cost
 
@@ -78,7 +79,31 @@ def bank(request):
             energySaved=kWh
         )
         saving.save()
-        return JsonResponse({"message": "OK"}, status=201)
+    
+    periods = [
+        ["one", "day", 1],
+        ["one", "week", 7],
+        ["one", "month", 30],
+        ["three", "months", 92],
+        ["six", "months", 182],
+        ["one", "year", 365]    
+    ]
+    
+    kWh  = float(kWh)
+
+    frequency_index = random.randint(0, len(periods) - 2)
+    duration_index = random.randint(frequency_index + 1, len(periods) - 1)
+
+    total_kWh = (periods[duration_index][2] / periods[frequency_index][2]) * kWh 
+ 
+    motivator = (
+        f"Thank you {request.user.username}. You have just saved {kWh} kWh of energy. "
+        +f"If you can do this once every {periods[frequency_index][1]} "
+        +f"for {periods[duration_index][0]} {periods[duration_index][1]}, "
+        +f"you will save {total_kWh:.0f} kWh in total."
+    )
+
+    return JsonResponse({'motivator': motivator})
 
 @csrf_exempt
 def delete(request, id):

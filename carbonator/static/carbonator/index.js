@@ -29,26 +29,10 @@ function recalculate() {
     const timemin = document.getElementById("duration").value;
     const timehr  = timemin / 60;
     const kWh = (watts * timehr) / 1000;
-    const money = document.getElementById("cents");
-    money.innerHTML = (kWh * costs.money).toFixed(2);
-    const co2e = document.getElementById("co2e");
-    co2e.innerHTML = (kWh * costs.co2e).toFixed();
-    const trees = document.getElementById("trees");
-    trees.innerHTML = (kWh * costs.trees).toFixed();
-    
-    // const moneyPerMonth = document.getElementById("cents-per-month");
-    // moneyPerMonth.innerHTML = kWh * costs.money * 30;
-    // const co2ePerMonth = document.getElementById("co2e-per-month");
-    // co2ePerMonth.innerHTML = kWh * costs.co2e * 30;
-    // const treesPerMonth = document.getElementById("trees-per-month");
-    // treesPerMonth.innerHTML = kWh * costs.trees * 30;
-    
-    // const moneyPerYear = document.getElementById("cents-per-year");
-    // moneyPerYear.innerHTML = kWh * costs.money * 365;
-    // const co2ePerYear = document.getElementById("co2e-per-year");
-    // co2ePerYear.innerHTML = kWh * costs.co2e * 365;
-    // const treesPerYear = document.getElementById("trees-per-year");
-    // treesPerYear.innerHTML = kWh * costs.trees * 365;
+    const energy = document.getElementById("kwh");
+    energy.innerText = kWh.toFixed(4);
+    const money = document.getElementById("money");
+    money.innerText = (kWh * costs.money).toFixed(2);    
 }
 
 function populateAppliances() {
@@ -72,8 +56,10 @@ function initializeConsumption() {
 function bank(event) {
 
     event.preventDefault();
-    const appliance = document.getElementById("appliance").value
-    const kWh = document.getElementById("consumption").value
+    const appliance = document.getElementById("appliance").value;
+    const duration = document.getElementById("duration").value;
+    const consumption = document.getElementById("consumption").value;
+    kWh = consumption / 1000 * duration / 60;
     const csrftoken = getCookie('csrftoken');
     const request = new Request(
         '/bank',
@@ -88,11 +74,22 @@ function bank(event) {
             kWh: kWh,            
         })
     })
-    .then(() => {
-        message = document.getElementById("system-message");
-        message.textContent = `Thank you  ${username}. You have saved ${kWh} kWh.`;
+    .then(response => response.json())
+    .then(output => {
+        const messageContainer = document.getElementById("message-container")
+        messageContainer.innerText = ""
+        message = document.createElement('div');
+        message.id = "system-message";
+        message.textContent = output.motivator;
+        // const addText = `if you can do this once every ${frequency} for ${period}, you will avoid ${impactQuantity} ${impactQuality}, and this planet will be grateful to you.`;
+        // const addText2 = `you will also have an extra ${moneySaved} ${moneyUnit} in you pocket to spend on whatever you like.`
+        messageContainer.append(message);
+
     })
 }
+
+
+
 
 
 // Generate CSRF token to be able to use in fetch
