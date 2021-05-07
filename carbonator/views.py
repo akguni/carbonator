@@ -81,28 +81,70 @@ def bank(request):
         saving.save()
     
     periods = [
-        ["one", "day", 1],
-        ["one", "week", 7],
-        ["one", "month", 30],
-        ["three", "months", 92],
-        ["six", "months", 182],
-        ["one", "year", 365]    
+        ["", "a day", 1],
+        ["", "a week", 7],
+        ["", "a month", 30],
+        ["every ", "three months", 92],
+        ["every ", "six months", 182],
+        ["", "one year", 365]    
     ]
     
     kWh  = float(kWh)
 
-    frequency_index = random.randint(0, len(periods) - 2)
+    if kWh < 1:
+        multiplier = 1000
+        energy = kWh * 1000
+        energy_unit = "Wh"
+
+    else:
+        multiplier = 1
+        energy = kWh
+        energy_unit = "kWh"                
+
+    frequency_index = random.randint(0, len(periods) - 3)
     duration_index = random.randint(frequency_index + 1, len(periods) - 1)
 
-    total_kWh = (periods[duration_index][2] / periods[frequency_index][2]) * kWh 
- 
-    motivator = (
-        f"Thank you {request.user.username}. You have just saved {kWh} kWh of energy. "
-        +f"If you can do this once every {periods[frequency_index][1]} "
-        +f"for {periods[duration_index][0]} {periods[duration_index][1]}, "
-        +f"you will save {total_kWh:.0f} kWh in total."
+    total_kWh = (periods[duration_index][2] / periods[frequency_index][2]) * kWh
+    energy = kWh * multiplier
+    total_energy = total_kWh * multiplier
+
+    costs = setting_check(request.user)
+
+    total_money = total_kWh * float(costs['money'])
+    money_unit = costs['moneyUnit']
+    total_co2e = total_kWh * float(costs['co2e'])
+    total_trees = total_kWh * float(costs['trees'])
+    
+
+    watt = f"you will save {total_energy:.0f} {energy_unit} in total"
+
+    co2e = (total_co2e >= 1) * (
+        f"you will avoid {total_co2e:.0f} kg of CO\u2082 emissions to the atmosphere"
     )
 
+
+    impact = random.choice([watt, co2e]) if total_co2e>=1 else watt
+
+    tree = (
+        (total_trees >= 1) * (
+        f", which has the same effect as planting {total_trees:.1f} trees"
+        )
+        +f"!"
+    )
+    
+    money = (total_money >= 1) * (
+        f"\n\nYou will also end up with an extra {total_money:.2f} {money_unit} "
+        +f"in your pocket to spend on whatever you like."
+    )
+
+    motivator = (
+        f"Thank you {request.user.username}. You have just saved {energy:.2f} {energy_unit} of energy."
+        +f"\n\nIf you can do this once {periods[frequency_index][0]}{periods[frequency_index][1]} "
+        +f"for {periods[duration_index][1]}, "
+    )
+
+    motivator += impact + tree + money
+    
     return JsonResponse({'motivator': motivator})
 
 @csrf_exempt
@@ -167,8 +209,8 @@ def setting_check(user):
     settings = {
         'money': 0.315,
         'moneyUnit': 'Euro',
-        'co2e': 400,
-        'trees': 10
+        'co2e': 0.40,
+        'trees': 25e-4
     }
     
     return settings

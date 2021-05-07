@@ -57,6 +57,7 @@ function addSaving(contents) {
     buttonCell.classList.add('delete-column');
     deleteButton = document.createElement('button');
     deleteButton.className = 'delete';
+    deleteButton.title = 'delete';
     deleteButton.id = contents.id;
     deleteButton.innerHTML = String.fromCodePoint(0x1F5D1);
     buttonCell.append(deleteButton);
