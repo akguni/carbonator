@@ -81,10 +81,7 @@ function bank(event) {
         message = document.createElement('div');
         message.id = "system-message";
         message.innerText = output.motivator;
-        // const addText = `if you can do this once every ${frequency} for ${period}, you will avoid ${impactQuantity} ${impactQuality}, and this planet will be grateful to you.`;
-        // const addText2 = `you will also have an extra ${moneySaved} ${moneyUnit} in you pocket to spend on whatever you like.`
         messageContainer.append(message);
-
     })
 }
 

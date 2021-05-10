@@ -96,6 +96,7 @@ def bank(request):
         energy = kWh * 1000
         energy_unit = "Wh"
 
+
     else:
         multiplier = 1
         energy = kWh
@@ -129,12 +130,15 @@ def bank(request):
         (total_trees >= 1) * (
         f", which has the same effect as planting {total_trees:.1f} trees"
         )
-        +f"!"
+        +(total_trees < 1 and total_trees > .01 and random.random() > 0.50) * (
+        f", which would have the same effect as planting a tree if {(1/total_trees - 1):.0f} other people who care about the future of our planet also did the same"
+        )
+        +f"."
     )
     
     money = (total_money >= 1) * (
         f"\n\nYou will also end up with an extra {total_money:.2f} {money_unit} "
-        +f"in your pocket to spend on whatever you like."
+        +f"for your household to spend on something else you like."
     )
 
     motivator = (
