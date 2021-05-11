@@ -36,7 +36,7 @@ def profile(request):
     })
 
 def savings(request):
-
+    
     savings = Saving.objects.filter(saver=request.user)
 
     # clean up records flagged for deletion
@@ -138,7 +138,7 @@ def bank(request):
     
     money = (total_money >= 1) * (
         f"\n\nYou will also end up with an extra {total_money:.2f} {money_unit} "
-        +f"for your household to spend on something else you like."
+        +f"for your household to spend on something else."
     )
 
     motivator = (
