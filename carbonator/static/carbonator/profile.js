@@ -76,11 +76,12 @@ function deleteSaving(target) {
         const saved = document.getElementById('total-saving');
         totalSaving = response.total_saving.energySaved__sum;
         saved.innerText = displayNumber(totalSaving); 
-        const message = document.getElementById('system-message');
+        const message = document.getElementById('message-container');
         const undo = document.createElement('a');
         undo.href = '/undo/' + target.id;
         undo.innerText = 'Undo';
-        message.innerHTML = "Saving deleted. ";
-        message.append(undo);         
+        message.innerText = "Saving deleted. ";
+        message.append(undo);
+        window.scrollTo(0,0);        
     })
 }

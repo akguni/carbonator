@@ -41,6 +41,8 @@ class Saving(models.Model):
             "deleteFlag": self.deleteFlag
         }
 
+    def is_valid_saving(self):
+        return self.energySaved <= (self.appliance.watts/1000 * 24)
 class Cost(models.Model):
     user = models.OneToOneField("User", on_delete=models.CASCADE, related_name="costs")
     money = models.DecimalField(max_digits=8, decimal_places=4)

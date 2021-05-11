@@ -4,7 +4,7 @@
 {% block body %}
 
 <div>Hello, {{ user.username }}. You have so far saved 
-    <span id="total-saving">{{ total_saving.energySaved__sum }}</span> kwH.
+    <span id="total-saving">{{ total_saving.energySaved__sum |floatformat:2 }}</span> kWh.
 </div>
 <div class="input-box" id="savings">
     <div id="savings-table">
