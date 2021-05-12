@@ -15,6 +15,7 @@ from .models import Appliance, Saving, User, Cost
 
 # Create your views here.
 
+
 def index(request):
     costs = setting_check(request.user)
     appliances = Appliance.objects.all()
