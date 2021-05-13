@@ -124,3 +124,5 @@ USE_THOUSAND_SEPARATOR = False
 STATIC_URL = '/static/'
 
 LOGIN_URL = 'login'
+
+DEFAULT_AUTO_FIELD='django.db.models.AutoField'
