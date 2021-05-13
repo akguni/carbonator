@@ -2,6 +2,7 @@ from django.test import Client, TestCase
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.firefox.options import Options
 # Create your tests here.
 
 from .models import User, Appliance, Saving
@@ -55,9 +56,8 @@ class SeleniumTestCase(StaticLiveServerTestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        options = webdriver.FirefoxOptions()
-        options.headless = True
-        webdriver.Firefox(options=options)
+        options = Options()
+        options.set_headless(True)
         cls.selenium = webdriver.Firefox()
         cls.selenium.implicitly_wait(10)
 

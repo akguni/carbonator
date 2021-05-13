@@ -305,3 +305,11 @@ console.warn: SearchSettings: "get: No settings file exists, new profile?" (new 
 1620894922865	Marionette	WARN	TLS certificate errors will be ignored for this session
 JavaScript error: http://localhost:53921/static/carbonator/index.js, line 51: TypeError: appliance.options[appliance.selectedIndex] is undefined
 1620894924891	Marionette	INFO	Stopped listening on port 35849
+1620911984667	geckodriver	INFO	Listening on 127.0.0.1:59459
+1620911985677	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileRgRr07"
+1620911987270	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1620911991244	Marionette	INFO	Listening on port 40965
+1620911991312	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://localhost:57017/static/carbonator/index.js, line 51: TypeError: appliance.options[appliance.selectedIndex] is undefined
+1620911993623	Marionette	INFO	Stopped listening on port 40965
