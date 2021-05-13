@@ -1,9 +1,8 @@
 from django.test import Client, TestCase
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
-# from selenium import webdriver
-# from selenium.webdriver.support.ui import Select
+from selenium import webdriver
+from selenium.webdriver.support.ui import Select
 # Create your tests here.
-
 
 from .models import User, Appliance, Saving
 
@@ -51,43 +50,43 @@ class SavingTestCase(TestCase):
         c.force_login(user = user)
         response = c.get("/halloffame")  
 
-# class SeleniumTestCase(StaticLiveServerTestCase):
+class SeleniumTestCase(StaticLiveServerTestCase):
 
-#     @classmethod
-#     def setUpClass(cls):
-#         super().setUpClass()
-#         cls.selenium = webdriver.Firefox()
-#         cls.selenium.implicitly_wait(10)
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.selenium = webdriver.Firefox()
+        cls.selenium.implicitly_wait(10)
 
-#     @classmethod
-#     def tearDownClass(cls):
-#         cls.selenium.quit()
-#         super().tearDownClass()
+    @classmethod
+    def tearDownClass(cls):
+        cls.selenium.quit()
+        super().tearDownClass()
 
-#     def register(self, username="someuser", password="somepassword"):
-#         self.selenium.get('%s%s' % (self.live_server_url, '/register'))
-#         username_input = self.selenium.find_element_by_name("username")
-#         username_input.send_keys(username)
-#         password_input = self.selenium.find_element_by_name("password")
-#         password_input.send_keys(password)
-#         password_input = self.selenium.find_element_by_name("confirmation")
-#         password_input.send_keys(password)
-#         self.selenium.find_element_by_xpath('//input[@value="Register"]').click()
+    def register(self, username="someuser", password="somepassword"):
+        self.selenium.get('%s%s' % (self.live_server_url, '/register'))
+        username_input = self.selenium.find_element_by_name("username")
+        username_input.send_keys(username)
+        password_input = self.selenium.find_element_by_name("password")
+        password_input.send_keys(password)
+        password_input = self.selenium.find_element_by_name("confirmation")
+        password_input.send_keys(password)
+        self.selenium.find_element_by_xpath('//input[@value="Register"]').click()
 
-#     def create_appliances(self):
-#         kettle = Appliance(name = "Kettle", watts = 2400, typicalDuration = 4)
-#         kettle.save()
+    def create_appliances(self):
+        kettle = Appliance(name = "Kettle", watts = 2400, typicalDuration = 4)
+        kettle.save()
 
-#     def test_calculator(self):
-#         self.register()
-#         self.create_appliances()
-#         self.selenium.get(self.live_server_url)
-#         appliance_selection = Select(self.selenium.find_element_by_name("appliance"))
-#         appliance_selection.select_by_visible_text("Kettle")
-#         duration_input = self.selenium.find_element_by_name("duration")
-#         duration_input.clear()
-#         duration_input.send_keys("10")
-#         self.selenium.find_element_by_xpath('//input[@value="Bank!"]').click()
-#         motivator_text = self.selenium.find_element_by_id("system-message").text
-#         validation_text = "You have just saved 400.00 Wh of energy."
-#         self.assertIn(validation_text, motivator_text)
+    def test_calculator(self):
+        self.register()
+        self.create_appliances()
+        self.selenium.get(self.live_server_url)
+        appliance_selection = Select(self.selenium.find_element_by_name("appliance"))
+        appliance_selection.select_by_visible_text("Kettle")
+        duration_input = self.selenium.find_element_by_name("duration")
+        duration_input.clear()
+        duration_input.send_keys("10")
+        self.selenium.find_element_by_xpath('//input[@value="Bank!"]').click()
+        motivator_text = self.selenium.find_element_by_id("system-message").text
+        validation_text = "You have just saved 400.00 Wh of energy."
+        self.assertIn(validation_text, motivator_text)
