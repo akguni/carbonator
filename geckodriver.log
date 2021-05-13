@@ -165,3 +165,143 @@ console.warn: SearchSettings: "get: No settings file exists, new profile?" (new 
 1620837941256	Marionette	INFO	Listening on port 44577
 1620837941498	Marionette	WARN	TLS certificate errors will be ignored for this session
 1620837943071	Marionette	INFO	Stopped listening on port 44577
+1620887551998	geckodriver	INFO	Listening on 127.0.0.1:43479
+1620887553006	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileEbxsrF"
+1620887554117	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1620887557115	Marionette	INFO	Listening on port 46801
+1620887557234	Marionette	WARN	TLS certificate errors will be ignored for this session
+1620887558991	Marionette	INFO	Stopped listening on port 46801
+1620887613352	geckodriver	INFO	Listening on 127.0.0.1:52277
+1620887614367	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilexE4gpl"
+1620887615274	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1620887617709	Marionette	INFO	Listening on port 43819
+1620887617820	Marionette	WARN	TLS certificate errors will be ignored for this session
+1620887619927	Marionette	INFO	Stopped listening on port 43819
+1620888897759	geckodriver	INFO	Listening on 127.0.0.1:36293
+1620888898776	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileJcTBAU"
+1620888899810	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1620888902826	Marionette	INFO	Listening on port 35163
+1620888902962	Marionette	WARN	TLS certificate errors will be ignored for this session
+1620888904125	Marionette	INFO	Stopped listening on port 35163
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1620889156264	geckodriver	INFO	Listening on 127.0.0.1:39497
+1620889156273	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileeuWMaL"
+1620889157236	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1620889159782	Marionette	INFO	Listening on port 41115
+1620889159852	Marionette	WARN	TLS certificate errors will be ignored for this session
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "http://localhost:46401"
+1620889170901	Marionette	INFO	Stopped listening on port 41115
+1620889260562	geckodriver	INFO	Listening on 127.0.0.1:45281
+1620889261571	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile0Rq4rG"
+1620889262486	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1620889265481	Marionette	INFO	Listening on port 36421
+1620889265647	Marionette	WARN	TLS certificate errors will be ignored for this session
+1620889265761	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+JavaScript error: http://localhost:51361/static/carbonator/index.js, line 51: TypeError: appliance.options[appliance.selectedIndex] is undefined
+1620889276906	Marionette	INFO	Stopped listening on port 36421
+1620889687260	geckodriver	INFO	Listening on 127.0.0.1:52453
+1620889687263	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilej7Jvg6"
+1620889688203	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1620889690625	Marionette	INFO	Listening on port 33673
+1620889690719	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://localhost:50627/static/carbonator/index.js, line 51: TypeError: appliance.options[appliance.selectedIndex] is undefined
+1620889692832	Marionette	INFO	Stopped listening on port 33673
+1620889713735	geckodriver	INFO	Listening on 127.0.0.1:58697
+1620889713745	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilejNK7ON"
+1620889714753	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1620889717439	Marionette	INFO	Listening on port 37589
+1620889717476	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://localhost:44597/static/carbonator/index.js, line 51: TypeError: appliance.options[appliance.selectedIndex] is undefined
+JavaScript error: http://localhost:44597/static/carbonator/index.js, line 51: TypeError: appliance.options[appliance.selectedIndex] is undefined
+1620889729492	Marionette	INFO	Stopped listening on port 37589
+1620890013086	geckodriver	INFO	Listening on 127.0.0.1:40963
+1620890014103	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilebg1q4M"
+1620890015096	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1620890018023	Marionette	INFO	Listening on port 41491
+1620890018097	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://localhost:45955/static/carbonator/index.js, line 51: TypeError: appliance.options[appliance.selectedIndex] is undefined
+JavaScript error: http://localhost:45955/static/carbonator/index.js, line 51: TypeError: appliance.options[appliance.selectedIndex] is undefined
+1620890030374	Marionette	INFO	Stopped listening on port 41491
+1620890427282	geckodriver	INFO	Listening on 127.0.0.1:54091
+1620890428298	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileM7Zf8i"
+1620890429306	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1620890432159	Marionette	INFO	Listening on port 39415
+1620890432257	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://localhost:60953/static/carbonator/index.js, line 51: TypeError: appliance.options[appliance.selectedIndex] is undefined
+1620890443982	Marionette	INFO	Stopped listening on port 39415
+1620890528054	geckodriver	INFO	Listening on 127.0.0.1:53875
+1620890528057	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileBYG3FZ"
+1620890529044	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1620890531481	Marionette	INFO	Listening on port 36579
+1620890531627	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://localhost:34749/static/carbonator/index.js, line 51: TypeError: appliance.options[appliance.selectedIndex] is undefined
+1620890533938	Marionette	INFO	Stopped listening on port 36579
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1620890740450	geckodriver	INFO	Listening on 127.0.0.1:50253
+1620890741467	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile6J050y"
+1620890742424	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1620890744731	Marionette	INFO	Listening on port 40591
+1620890744860	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://localhost:40279/static/carbonator/index.js, line 51: TypeError: appliance.options[appliance.selectedIndex] is undefined
+1620890756843	Marionette	INFO	Stopped listening on port 40591
+1620890771305	geckodriver	INFO	Listening on 127.0.0.1:43815
+1620890771312	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilefwFdcV"
+1620890772266	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1620890775030	Marionette	INFO	Listening on port 45631
+1620890775137	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://localhost:39977/static/carbonator/index.js, line 51: TypeError: appliance.options[appliance.selectedIndex] is undefined
+1620890777012	Marionette	INFO	Stopped listening on port 45631
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1620891049337	geckodriver	INFO	Listening on 127.0.0.1:34705
+1620891049341	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileiYKkFb"
+1620891050278	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1620891053385	Marionette	INFO	Listening on port 33927
+1620891053501	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://localhost:37795/static/carbonator/index.js, line 51: TypeError: appliance.options[appliance.selectedIndex] is undefined
+1620891055727	Marionette	INFO	Stopped listening on port 33927
+1620894746708	geckodriver	INFO	Listening on 127.0.0.1:58685
+1620894747713	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileMHMrHF"
+1620894748757	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1620894751773	Marionette	INFO	Listening on port 38401
+1620894751836	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://localhost:33877/static/carbonator/index.js, line 51: TypeError: appliance.options[appliance.selectedIndex] is undefined
+1620894753886	Marionette	INFO	Stopped listening on port 38401
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1620894873965	geckodriver	INFO	Listening on 127.0.0.1:37429
+1620894873970	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilePXe5uP"
+1620894874912	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1620894878252	Marionette	INFO	Listening on port 37677
+1620894878377	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://localhost:38809/static/carbonator/index.js, line 51: TypeError: appliance.options[appliance.selectedIndex] is undefined
+1620894880453	Marionette	INFO	Stopped listening on port 37677
+1620894918215	geckodriver	INFO	Listening on 127.0.0.1:49953
+1620894919227	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileFy23nY"
+1620894920228	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1620894922736	Marionette	INFO	Listening on port 35849
+1620894922865	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: http://localhost:53921/static/carbonator/index.js, line 51: TypeError: appliance.options[appliance.selectedIndex] is undefined
+1620894924891	Marionette	INFO	Stopped listening on port 35849
