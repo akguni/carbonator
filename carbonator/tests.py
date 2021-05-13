@@ -55,6 +55,9 @@ class SeleniumTestCase(StaticLiveServerTestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        options = webdriver.FirefoxOptions()
+        options.headless = True
+        webdriver.Firefox(options=options)
         cls.selenium = webdriver.Firefox()
         cls.selenium.implicitly_wait(10)
 
