@@ -58,7 +58,7 @@ class SeleniumTestCase(StaticLiveServerTestCase):
         super().setUpClass()
         options = Options()
         options.set_headless(True)
-        cls.selenium = webdriver.Firefox(firefox_options=options, firefox_binary="'/usr/bin/firefox")
+        cls.selenium = webdriver.Firefox(firefox_options=options)
         cls.selenium.implicitly_wait(10)
 
     @classmethod
