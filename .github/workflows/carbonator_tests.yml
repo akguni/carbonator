@@ -1,0 +1,12 @@
+name: Testing Carbonator App
+on: push
+
+jobs:
+  test_project:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run Django Tests
+      run: |
+        pip3 install --user django
+        python3 manage.py test

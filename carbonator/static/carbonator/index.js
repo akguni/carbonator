@@ -85,10 +85,6 @@ function bank(event) {
     })
 }
 
-
-
-
-
 // Generate CSRF token to be able to use in fetch
 function getCookie(name) {
     let cookieValue = null;
