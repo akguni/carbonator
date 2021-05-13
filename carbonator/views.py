@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, default_app_config, login, logout
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.db import IntegrityError
 from django.db.models import Q, Sum
