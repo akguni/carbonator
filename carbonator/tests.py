@@ -2,7 +2,9 @@ from django.test import Client, TestCase
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
-from selenium.webdriver.firefox.options import Options
+# from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.chrome.options import Options
+
 # Create your tests here.
 
 from .models import User, Appliance, Saving
@@ -57,8 +59,12 @@ class SeleniumTestCase(StaticLiveServerTestCase):
     def setUpClass(cls):
         super().setUpClass()
         options = Options()
-        options.set_headless(True)
-        cls.selenium = webdriver.Firefox(firefox_options=options)
+        options.add_argument('--headless')
+        options.add_argument('--no-sandbox')
+        options.add_argument('--disable-dev-shm-usage')
+        # options.set_headless(True)
+        # cls.selenium = webdriver.Firefox(firefox_options=options)
+        cls.selenium = webdriver.Chrome(chrome_options=options, service_args=['--verbose', '--log-path=/tmp/chromedriver.log'])
         cls.selenium.implicitly_wait(10)
 
     @classmethod
