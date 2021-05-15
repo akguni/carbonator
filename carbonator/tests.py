@@ -62,6 +62,8 @@ class SeleniumTestCase(StaticLiveServerTestCase):
         options.add_argument('--headless')
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-dev-shm-usage')
+        # the line below fixed DevToolsActivePort file doesn't exist error with local Chromium Selenium test
+        options.add_argument('--remote-debugging-port=8000')
         # options.set_headless(True)
         # cls.selenium = webdriver.Firefox(firefox_options=options)
         cls.selenium = webdriver.Chrome(chrome_options=options, service_args=['--verbose', '--log-path=/tmp/chromedriver.log'])
