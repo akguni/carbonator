@@ -2,17 +2,30 @@ name: Testing Carbonator App
 on: push
 
 jobs:
-  test_project:
+  build:
     runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:10.8
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: github_actions
+        ports:
+          - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
     steps:
     - uses: actions/checkout@v2
     - name: Run Django Tests
       run: |
-        sudo apt-get install postgresql postgresql-contrib
-        sudo apt-get install postgresql-client
+        # sudo apt-get install postgresql postgresql-contrib
+        # sudo apt-get install postgresql-client
         sudo apt-get install libpq-dev
         sudo apt-get install chromium-browser
-        pip3 install --user psycopg2
-        pip3 install --user django
-        pip3 install --user selenium
+        # pip3 install --user psycopg2
+        # pip3 install --user django
+        # pip3 install --user selenium
         python3 manage.py test
