@@ -9,6 +9,8 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
+# Added this so that I can use environment variables for database
+import os
 
 from pathlib import Path
 
@@ -71,24 +73,20 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'capstone.wsgi.application'
 
+POSTGRES_HOST = os.environ.get('POSTGRES_HOST', default="localhost")
+POSTGRES_DB = os.environ.get('POSTGRES_DB', default="carbonator")
+POSTGRES_USER = os.environ.get('POSTGRES_USER', default="carbonator")
+POSTGRES_PASSWORD = os.environ.get('POSTGRES_PASSWORD', default="carbonator")
+
 DATABASES = {
-
     'default': {
-
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-
-        'NAME': 'carbonator',
-
-        'USER': 'carbonator',
-
-        'PASSWORD': 'carbonator',
-
-        'HOST': 'localhost',
-
+        'NAME': POSTGRES_DB,
+        'USER': POSTGRES_USER,
+        'PASSWORD': POSTGRES_PASSWORD,
+        'HOST': POSTGRES_HOST,
         'PORT': '',
-
     }
-
 }
 
 AUTH_USER_MODEL = 'carbonator.User'

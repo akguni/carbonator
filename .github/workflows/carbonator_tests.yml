@@ -12,6 +12,8 @@ jobs:
           POSTGRES_USER: carbonator
           POSTGRES_PASSWORD: carbonator
           POSTGRES_DB: carbonator
+        volumes:
+          - postgres_data:/var/lib/postgresql/12/main
         ports:
           - 5432:5432
         # needed because the postgres container does not provide a healthcheck
