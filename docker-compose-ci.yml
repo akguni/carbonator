@@ -17,10 +17,11 @@ services:
         build: ./docker/website
         image: carbonator:latest
         container_name: django_image
-        command: >
-            bash -c "./wait-for-postgres.sh &&
-            python manage.py migrate &&
-            python manage.py runserver 0.0.0.0:8000"
+        # command: >
+        #     bash -c "./wait-for-postgres.sh &&
+        #     python manage.py migrate &&
+        #     python manage.py test"
+        command: tail -f /dev/null
         volumes: *service-volumes
         environment: *app-variables
         ports:
