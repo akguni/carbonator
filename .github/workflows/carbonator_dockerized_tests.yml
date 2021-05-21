@@ -1,7 +1,7 @@
 name: Testing Carbonator in Docker Containers
 on: push
-    branches:
-      - containerization
+  branches:
+    - containerization
 
 jobs:
   build:
@@ -31,7 +31,7 @@ jobs:
       run: docker logs django_image
     - name: Run test suite
       run: docker exec django_image python manage.py test
-      
+
     # - name: Run Django Tests
     #   run: |
 
