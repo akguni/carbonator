@@ -10,6 +10,6 @@ RUN apt-get update && \
 
 COPY . .
 
-RUN pip install -r ./docker/website/requirements.txt
+RUN pip install -r requirements.txt
 
 EXPOSE 8000
