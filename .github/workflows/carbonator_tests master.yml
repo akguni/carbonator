@@ -1,6 +1,9 @@
-name: Testing Carbonator App
-on: push
-
+name: Testing Master
+on:
+  push:
+    branches:
+      - master
+      
 jobs:
   build:
     runs-on: ubuntu-latest
