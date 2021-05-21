@@ -14,6 +14,7 @@ x-app-variables: &app-variables
 
 services:
     website:
+        build: ./docker/website
         image: carbonator:latest
         container_name: django_image
         # command: >
