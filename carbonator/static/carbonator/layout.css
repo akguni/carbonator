@@ -4,6 +4,29 @@
   box-sizing: border-box;
 }
 
+.swatch_1{
+  background: #e3090f;
+}
+.swatch_2{
+  background: #f4f5f6;
+}
+.swatch_3{
+  background: #af080c;
+}
+.swatch_4{
+  background: #a1a5a9;
+}
+.swatch_5{
+  background: #e0535b;
+}
+.swatch_6{
+  background: #867f88;
+}
+.swatch_7{
+  background: #3a4047;
+}
+
+
 body {
   display: flex;
   flex-direction: column;
@@ -11,14 +34,12 @@ body {
 
   margin: 0;
   padding: 0;
-  background: linear-gradient(to right, orange, rgba(255, 85, 79, 0.952));
 }
 
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: khaki;
   color: navy;
 }
 
@@ -109,7 +130,6 @@ body {
   display: flex;  
   justify-content: space-between;
   align-items: center;
-  background-color: khaki;
   color: black;
 }
 
