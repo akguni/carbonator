@@ -14,7 +14,7 @@
         {% block script %}
         {% endblock %}
     </head>
-    <body class="swatch_3">
+    <body>
         <nav class="navbar swatch_2">
             <a href="{% url 'index' %}" class="brand-title">Carbonator</a>
             <a href="#" class="toggle-button">
@@ -35,12 +35,13 @@
                     {% endif %}
                 </ul>
             </div>
-        
         </nav>
-    {% load humanize %}
-    <div id="message-container"></div>
-        {% block body %}
-        {% endblock %}
+        <main>
+            {% load humanize %}
+            <div class="swatch_2" id="message-container"></div>
+            {% block body %}
+            {% endblock %}
+        </main>
         <div class = "footer swatch_2">
             <div class ="footer-content">Carbonator</div>
             <div class ="footer-content">E-mail</div>

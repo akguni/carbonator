@@ -9,7 +9,7 @@
 {{ request.user.username|json_script:"username" }}
 
 <div class="flexbox-container">
-    <div class="flexbox-item-1">
+    <div class="flexbox-content item-1 swatch_3">
         <div class="input-box swatch_2">
             <form action="{% url 'bank' %}" id="lighting-form" method="POST">
                 {% csrf_token %}
@@ -30,7 +30,7 @@
         </div>
     </div>  
     
-    <div class="flexbox-item-2 swatch_4">
+    <div class="flexbox-content item-2 swatch_4">
         <div class="input-box swatch_2">
             <div class="title">Result</div>
                 <div>

@@ -31,10 +31,21 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  /* mobile viewport bug fix */
+  min-height: -webkit-fill-available;
 
   margin: 0;
   padding: 0;
 }
+html {
+  height: -webkit-fill-available;
+}
+
+main {
+  flex: 1;
+}
+
+
 
 .navbar {
   display: flex;
