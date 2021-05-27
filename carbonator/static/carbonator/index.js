@@ -30,7 +30,15 @@ function recalculate() {
     const timehr  = timemin / 60;
     const kWh = (watts * timehr) / 1000;
     const energy = document.getElementById("kwh");
-    energy.innerText = kWh.toFixed(4);
+    const energyUnit = document.getElementById("energyUnit");
+    if (kWh < 0.1) {
+        energy.innerText = (kWh * 1000).toFixed(2);
+        energyUnit.innerText = "Wh";        
+    } else {
+        energy.innerText = kWh.toFixed(2);
+        energyUnit.innerText = "kWh";        
+    };
+
     const money = document.getElementById("money");
     money.innerText = (kWh * costs.money).toFixed(2);    
 }
