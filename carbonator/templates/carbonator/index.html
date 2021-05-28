@@ -11,7 +11,7 @@
 <div class="flexbox-container">
     <div class="flexbox-content item-1 swatch_3">
         <div class="input-box swatch_2">
-            <form action="{% url 'bank' %}" id="lighting-form" class ="" method="POST">
+            <form action="{% url 'bank' %}" id="lighting-form" class ="formbox" method="POST">
                 {% csrf_token %}
                 <div class="title">Switch Off</div>
                 <div class="form__group field">
@@ -37,14 +37,16 @@
     
     <div class="flexbox-content item-2 swatch_4">
         <div class="input-box swatch_2">
-            <div class="title">Result</div>
-            <div class=result-group>
-                    <div class="result" id="kwh"></div>
-                    <div class="unit" id="energyUnit"></div>
-            </div>
-            <div class=result-group>
-                    <div class="result" id="money"></div>
-                    <div class="unit">{{ costs.moneyUnit }}</div>
+            <div class="result-box">
+                <div class="title">Result</div>
+                <div class=result-group>
+                        <div class="result" id="kwh"></div>
+                        <div class="unit" id="energyUnit"></div>
+                </div>
+                <div class=result-group>
+                        <div class="result" id="money"></div>
+                        <div class="unit">{{ costs.moneyUnit }}</div>
+                </div>
             </div>
         </div>
     </div>

@@ -7,23 +7,25 @@
 
 <div class="flexbox-content swatch_3">
     <div class="hall-of-fame swatch_2" id="savings">
-        <div class="title">Top Energy Savers</div>
-        <table id="savers-table">
-            <thead class="savers header">
-                <tr>
-                    <th class="rank-column saver">Rank</th>
-                    <th class="user-column saver">User</th>
-                    <th class="kwh-column saver">Saving (kWh)</th>
+        <div class="hall-box">
+            <div class="title">Top Energy Savers</div>
+            <table id="savers-table">
+                <thead class="savers header">
+                    <tr>
+                        <th class="rank-column saver" style = "text-align: right;">Rank</th>
+                        <th class="user-column saver">Username</th>
+                        <th class="kwh-column saver">kWh</th>
+                    </tr>
+                </thead>
+                {% for user in halloffame %}
+                <tr class="savers">
+                    <td class="saver" style = "text-align: right;">{{ forloop.counter }} - </td>
+                    <td class="saver">{{ user.username }}</td>
+                    <td class="saver">{{ user.totalSaved|floatformat:"0"|intcomma }}</td>
                 </tr>
-            </thead>
-            {% for user in halloffame %}
-            <tr class="savers">
-                <td class="rank-column saver">{{ forloop.counter }} - </td>
-                <td class="user-column saver">{{ user.username }}</td>
-                <td class="kwh-column saver">{{ user.totalSaved|floatformat:"0"|intcomma }}</td>
-            </tr>
-            {% endfor %}
-        </table>
+                {% endfor %}
+            </table>
+        </div>
     </div>
     
 </div>
