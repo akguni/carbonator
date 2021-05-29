@@ -42,18 +42,18 @@ function retrieveNext() {
 };
 
 function addSaving(contents) {
-    const saving = document.createElement('div');
+    const saving = document.createElement('tr');
     saving.classList.add('saving');
-    const appliance = document.createElement('div');
+    const appliance = document.createElement('td');
     appliance.classList.add('appliance-column');
     appliance.innerHTML = contents.appliance;
-    const kwh = document.createElement('div');
+    const kwh = document.createElement('td');
     kwh.classList.add('kwh-column')
     kwh.innerHTML = displayNumber(contents.energySaved);
-    const date = document.createElement('div');
+    const date = document.createElement('td');
     date.classList.add('date-column');
     date.innerHTML = displayDate(new Date(contents.timestamp));
-    const buttonCell = document.createElement('div');
+    const buttonCell = document.createElement('td');
     buttonCell.classList.add('delete-column');
     deleteButton = document.createElement('button');
     deleteButton.className = 'delete';

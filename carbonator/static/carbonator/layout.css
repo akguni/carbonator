@@ -56,7 +56,7 @@ main {
 }
 
 .brand-title {
-  color: black;
+  color: #f4f5f6;
   display: block;
   text-decoration: none;
   font-size: 1.5rem;
@@ -75,7 +75,7 @@ main {
 
 .navbar-links li a {
   text-decoration: none;
-  color: black;
+  color: #f4f5f6;
   padding: 1rem;
   display: block;
 }
@@ -142,11 +142,11 @@ main {
   display: flex;  
   justify-content: space-between;
   align-items: center;
-  color: black;
+  color: #f4f5f6;
 }
 
 .footer-content {
   padding: 0.5rem;
   margin: 0.5rem;
-  font-size: 0.8rem;
+  font-size: 1rem;
 }
