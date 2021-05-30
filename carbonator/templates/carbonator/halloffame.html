@@ -21,7 +21,7 @@
                 <tr class="savers">
                     <td class="saver" style = "text-align: right;">{{ forloop.counter }} - </td>
                     <td class="saver">{{ user.username }}</td>
-                    <td class="saver">{{ user.totalSaved|floatformat:"0"|intcomma }}</td>
+                    <td class="saver" style = "text-align: right;">{{ user.totalSaved|floatformat:"0"|intcomma }}</td>
                 </tr>
                 {% endfor %}
             </table>

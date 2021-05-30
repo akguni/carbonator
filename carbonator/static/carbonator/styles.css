@@ -160,11 +160,15 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.hall-box, .profile-box {
+.hall-box, .profile-box, .register-box, .login-box {
   display: flex;
   flex-direction: column;
   width: 80%;
   padding-bottom: 2em; 
+}
+
+.form-group {
+  margin-bottom: 0.5em;
 }
 
 .title {
@@ -189,18 +193,16 @@ tr:nth-child(even) {
   background: #a1a5a9;
 }
 
+td, th {
+  padding: 5px;
+}
+
 .saver {
   border: 1px solid black;
-  padding: 5px;
   font-size: 1.5em;
 }
 
 .saving {
-  /* display: flex;
-  align-items: center;
-  flex: 1; */
-  padding: 5px;
-  font-size: 1.5em;
   margin: 2px;
   animation-name: hide;
   animation-duration: 1s;
@@ -213,7 +215,6 @@ tr:nth-child(even) {
 
 
 .appliance-column, .kwh-column, .date-column, .delete-column, .rank-column, .saver-column {
-  font-size: medium;
 }
 
 .appliance-column {
@@ -232,7 +233,6 @@ tr:nth-child(even) {
 .delete-column {
   width: 4em;
 }
-
 
 
 
