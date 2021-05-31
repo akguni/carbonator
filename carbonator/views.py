@@ -28,12 +28,13 @@ def index(request):
 
 @login_required
 def profile(request):
-    savings = Saving.objects.filter(saver=request.user).exclude(deleteFlag=True)
-    total_saving = savings.aggregate(Sum('energySaved'))
-
+    allsavings = Saving.objects.exclude(deleteFlag=True).values('saver').annotate(sum=Sum('energySaved'))
+    total_saving = allsavings.get(saver=request.user)
+    rank = allsavings.filter(sum__gt=total_saving['sum']).count() + 1
     return render(request, "carbonator/profile.html", {
         "savings": savings,
         "total_saving": total_saving,
+        "rank": rank,
     })
 
 def savings(request):

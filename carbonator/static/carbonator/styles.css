@@ -62,6 +62,7 @@
 
 .button {
   width: 100%;
+  margin-bottom: 0.5em; 
 }
 
 .input-box {
@@ -152,7 +153,7 @@
   font-size: 3vw;
 }
 
-.hall-of-fame, .profile {
+.hall-of-fame, .profile, .register, .settings {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -162,7 +163,7 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.hall-box, .profile-box, .register-box, .login-box {
+.hall-box, .profile-box, .register-box, .login-box, .settings-box {
   display: flex;
   flex-direction: column;
   width: 80%;
@@ -213,7 +214,10 @@ td, th {
 }
 
 
-
+.setting {
+  display:inline-block;
+  min-width: 20em;
+}
 
 
 .appliance-column, .kwh-column, .date-column, .delete-column, .rank-column, .saver-column {

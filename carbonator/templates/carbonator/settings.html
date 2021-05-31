@@ -3,18 +3,19 @@
 
 {% block body %}
 
-<div class="calculator-background">
-    <div class="input-box">
+<div class="flexbox-content swatch_3">
+    <div class="settings swatch_2">
+        <div class="settings-box">
         <form action="{% url 'settings' %}" id="settings-form" method="POST">
             {% csrf_token %}
             <div class="title">User Settings</div>
-            <label for="money-unit">Units for Money</label>
+            <label for="money-unit" class="setting">Units for Money</label>
             <input type="text" id="money-unit" name="money-unit" value="{{ settings.moneyUnit }}"><br><br>
-            <label for="money">Unit Cost per kWh</label>
+            <label for="money" class="setting">Unit Cost per kWh</label>
             <input type ="text" inputmode="decimal" id="money" name="money" value="{{ settings.money }}"><br><br>
-            <label for="co2e">kg CO2e per kWh</label>
+            <label for="co2e" class="setting">kg CO2e per kWh</label>
             <input type ="text" inputmode="decimal" id="co2e" name="co2e" value="{{ settings.co2e }}"><br><br>
-            <label for="trees">trees per kWh</label>
+            <label for="trees" class="setting">trees per kWh</label>
             <input type ="text" inputmode="decimal" id="trees" name="trees" value="{{ settings.trees }}"><br><br>                      
             <input type="submit" class="button" value="Save">
             <input type="reset" class="button" value="Reset">
