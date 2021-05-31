@@ -126,6 +126,8 @@
 }
 .header {
   font-weight: bold;
+  text-align: center;
+  margin: 5px;
 }
 
 .result-group {

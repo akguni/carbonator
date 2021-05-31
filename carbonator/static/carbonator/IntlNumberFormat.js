@@ -3,7 +3,7 @@ function displayCurrency(number) {
 }
 
 function displayNumber(number) {
-    return new Intl.NumberFormat('en-GB', { maximumFractionDigits: 2}).format(number);
+    return new Intl.NumberFormat('en-GB', { minimumFractionDigits: 2}).format(number);
 }
 
 function displayDate(date) {

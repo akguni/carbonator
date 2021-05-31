@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.db import IntegrityError
-from django.db.models import Q, Sum
+from django.db.models import Q, Sum, F
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 
@@ -61,7 +61,7 @@ def savings(request):
 def halloffame(request):
 
     savings = Saving.objects.exclude(deleteFlag__exact=True) 
-    halloffame = User.objects.exclude(is_superuser=True).annotate(totalSaved=Sum('savings__energySaved', filter=Q(savings__deleteFlag__exact=False))).order_by('-totalSaved')
+    halloffame = User.objects.exclude(is_superuser=True).annotate(totalSaved=Sum('savings__energySaved', filter=Q(savings__deleteFlag__exact=False))).order_by(F('totalSaved').desc(nulls_last=True))
 
     return render(request, "carbonator/halloffame.html", {
         "halloffame": halloffame,
