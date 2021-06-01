@@ -90,6 +90,7 @@ function bank(event) {
         message.id = "system-message";
         message.innerText = output.motivator;
         messageContainer.append(message);
+        window.scrollTo(0,0); 
     })
 }
 

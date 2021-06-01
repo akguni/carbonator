@@ -7,10 +7,12 @@
 <div class="flexbox-content swatch_3">
     <div class="profile swatch_2" id="savings">
         <div class="profile-box">
-            <div class="header">{{ user.username }}: You are in rank {{ rank }} with   
-                <span id="total-saving">{{ total_saving.sum |floatformat:2 }}</span> kWh.
+            <div class="header">
+                <p>Username: {{ user.username }}</p>
+                <span>Total Saved kWh: </span><span id="total-saving">{{ total_saving |floatformat:2 }}</span>
+                <br>
+                <span>Rank: </span><span id="rank">{{ rank }}</span><span> out of {{ total_users }}</span>
             </div>
-            <div class="header">This is a list of the individual savings you have achieved so far.</div> 
             <table id="savings-table">
                 <thead class="saving">
                     <th class="appliance-column header">Appliance</th>
