@@ -2,7 +2,7 @@ name: Testing Carbonator in Docker Containers
 on: 
   push:
     branches:
-      - containerization
+      - master
 
 jobs:
   build:
