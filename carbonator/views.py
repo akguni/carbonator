@@ -182,9 +182,6 @@ def savings(request):
     })
 
 
-
-
-
 def halloffame(request):
 
     halloffame = User.objects.exclude(is_superuser=True).annotate(totalSaved=Sum('savings__energySaved', filter=Q(savings__deleteFlag__exact=False))).order_by(F('totalSaved').desc(nulls_last=True))[:10]
