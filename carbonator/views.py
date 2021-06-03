@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.db import IntegrityError
-from django.db.models import Q, Sum
+from django.db.models import Q, Sum, F
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 
@@ -28,44 +28,52 @@ def index(request):
 
 @login_required
 def profile(request):
-    savings = Saving.objects.filter(saver=request.user).exclude(deleteFlag=True)
-    total_saving = savings.aggregate(Sum('energySaved'))
-
+    total_saving, rank, total_users = savingtotals(request)
     return render(request, "carbonator/profile.html", {
         "savings": savings,
         "total_saving": total_saving,
+        "rank": rank,
+        "total_users": total_users,
     })
 
-def savings(request):
+
+@csrf_exempt
+def delete(request, id):
+    if request.method != "PUT":
+        return JsonResponse({"error": "PUT request required."}, status=400)
     
-    savings = Saving.objects.filter(saver=request.user)
+    saving = Saving.objects.get(id=id)
+    saving.deleteFlag = True
+    saving.save()
 
-    # clean up records flagged for deletion
-    savings.filter(deleteFlag=True).delete()
-    numberSavings = len(savings)
- 
-
-    # Get start and end points
-    start = int(request.GET.get("start"))
-    end = int(request.GET.get("end")) + 1
-
-    savings = savings.order_by('-energySaved')[start:end]
-    savings = [saving.serialize() for saving in savings]
-    
+    total_saving, rank, total_users = savingtotals(request)
     return JsonResponse({
-        "savings": savings,
-        "numberSavings": numberSavings,
-    })
+        "id": id,
+        "total_saving": total_saving,
+        "rank": rank,
+        "total_users": total_users,
+        })
 
+# separate function to calculate total savings rank and total user numbers
+# these values are used for both profile and delete routes
+# in order to avoid duplication, separated the calculations as a separate function
+def savingtotals(request):
+    allsavings = Saving.objects.exclude(deleteFlag=True).values('saver').annotate(sum=Sum('energySaved'))
+    try:
+        total_saving = allsavings.get(saver=request.user)['sum']
+    except Saving.DoesNotExist:
+        total_saving = 0
+    rank = allsavings.filter(sum__gt=total_saving).count() + 1
+    total_users = User.objects.count() - 1
+    return total_saving, rank, total_users
 
-def halloffame(request):
+@csrf_exempt
+def undo(request, id):    
+    saving = Saving.objects.get(id=id)
+    saving.deleteFlag = False
+    saving.save()
 
-    savings = Saving.objects.exclude(deleteFlag__exact=True) 
-    halloffame = User.objects.exclude(is_superuser=True).annotate(totalSaved=Sum('savings__energySaved', filter=Q(savings__deleteFlag__exact=False))).order_by('-totalSaved')
-
-    return render(request, "carbonator/halloffame.html", {
-        "halloffame": halloffame,
-    })
+    return redirect('profile')
 
 
 @login_required
@@ -152,31 +160,37 @@ def bank(request):
     
     return JsonResponse({'motivator': motivator})
 
-@csrf_exempt
-def delete(request, id):
-    if request.method != "PUT":
-        return JsonResponse({"error": "PUT request required."}, status=400)
+def savings(request):
     
-    saving = Saving.objects.get(id=id)
-    saving.deleteFlag = True
-    saving.save()
+    savings = Saving.objects.filter(saver=request.user)
 
-    savings = Saving.objects.filter(saver= request.user).exclude(deleteFlag__exact=True)
-    total_saving = savings.aggregate(Sum('energySaved'))
+    # clean up records flagged for deletion
+    savings.filter(deleteFlag=True).delete()
+    numberSavings = len(savings)
+ 
 
+    # Get start and end points
+    start = int(request.GET.get("start"))
+    end = int(request.GET.get("end")) + 1
+
+    savings = savings.order_by('-timestamp')[start:end]
+    savings = [saving.serialize() for saving in savings]
+    
     return JsonResponse({
-        "id": id,
-        "total_saving": total_saving,
-        })
+        "savings": savings,
+        "numberSavings": numberSavings,
+    })
 
 
-@csrf_exempt
-def undo(request, id):    
-    saving = Saving.objects.get(id=id)
-    saving.deleteFlag = False
-    saving.save()
+def halloffame(request):
 
-    return redirect('profile')
+    halloffame = User.objects.exclude(is_superuser=True).annotate(totalSaved=Sum('savings__energySaved', filter=Q(savings__deleteFlag__exact=False))).order_by(F('totalSaved').desc(nulls_last=True))[:10]
+
+    return render(request, "carbonator/halloffame.html", {
+        "halloffame": halloffame,
+    })
+
+
 
 
 @csrf_exempt

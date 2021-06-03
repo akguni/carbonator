@@ -5,24 +5,29 @@
 
 {% load humanize %}
 
-<div id="system-message"></div>
-
-<div>Top Energy Savers</div>
-<div class="input-box" id="savings">
-    <div id="savings-table">
-        <div class="saving">
-            <div class="rank-column header">Rank</div>
-            <div class="saver-column header">User</div>
-            <div class="kwh-column header">Saving (kwh)</div>
+<div class="flexbox-content swatch_3">
+    <div class="hall-of-fame swatch_2" id="savings">
+        <div class="hall-box">
+            <div class="title">Top 10 Energy Savers</div>
+            <table id="savers-table">
+                <thead class="savers header">
+                    <tr>
+                        <th class="rank-column saver" style = "text-align: right;">Rank</th>
+                        <th class="user-column saver">Username</th>
+                        <th class="kwh-column saver">kWh</th>
+                    </tr>
+                </thead>
+                {% for user in halloffame %}
+                <tr class="savers">
+                    <td class="saver" style = "text-align: right;">{{ forloop.counter }} - </td>
+                    <td class="saver">{{ user.username }}</td>
+                    <td class="saver" style = "text-align: right;">{{ user.totalSaved|floatformat:"0"|intcomma }}</td>
+                </tr>
+                {% endfor %}
+            </table>
         </div>
-        {% for user in halloffame %}
-        <div class="saving">
-            <div class="rank-column">{{ forloop.counter }} - </div>
-            <div class="saver-column">{{ user.username }}</div>
-            <div class="kwh-column">{{ user.totalSaved|floatformat:"0"|intcomma }}</div>
-        </div>
-        {% endfor %}
     </div>
+    
 </div>
 {% endblock %}
 {% block script %}

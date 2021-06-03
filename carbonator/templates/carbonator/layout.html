@@ -15,7 +15,7 @@
         {% endblock %}
     </head>
     <body>
-        <nav class="navbar">
+        <nav class="navbar swatch_7">
             <a href="{% url 'index' %}" class="brand-title">Carbonator</a>
             <a href="#" class="toggle-button">
                 <span class="bar"></span>
@@ -35,13 +35,14 @@
                     {% endif %}
                 </ul>
             </div>
-        
         </nav>
-    {% load humanize %}
-    <div id="message-container"></div>
-        {% block body %}
-        {% endblock %}
-        <div class = "footer">
+        <main>
+            {% load humanize %}
+            <div class="swatch_2" id="message-container"></div>
+            {% block body %}
+            {% endblock %}
+        </main>
+        <div class = "footer swatch_7">
             <div class ="footer-content">Carbonator</div>
             <div class ="footer-content">E-mail</div>
             <div class ="footer-content">Disclaimer</div>

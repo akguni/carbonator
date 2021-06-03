@@ -1,0 +1,31 @@
+name: Testing Master
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_USER: carbonator
+          POSTGRES_PASSWORD: carbonator
+          POSTGRES_DB: carbonator
+        volumes:
+          - postgres_data:/var/lib/postgresql/12/main
+        ports:
+          - 5432:5432
+ 
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run Django Tests
+      run: |
+        sudo apt-get install libpq-dev
+        sudo apt-get install chromium-browser
+        python3 -m pip install --upgrade pip
+        pip3 install -r requirements.txt
+        python3 manage.py test

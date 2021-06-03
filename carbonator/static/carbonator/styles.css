@@ -20,98 +20,226 @@
 }
 
 #system-message {
-  background: rgb(253, 240, 61);
-  border: 2px solid black;
-  border-radius: 10px;
-  margin: 25px auto 0px;
+  border-style: solid;
+  margin: 10px auto 10px;
   padding: 20px;
-  width: 60%;
+  width: 80%;
   text-align: center;
+  font-size: x-large;
 }
 
-.calculator-background {
+
+/* to clear floats after a floating element */
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+.flexbox-container {
+  flex: 1;
+  flex-wrap: wrap;
+  display: flex;
+  margin: 0;
   padding: 0;
-  margin: 10px;
-  min-height: 20rem;
 }
 
-input {
+.flexbox-content {
+  flex: 1 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.item-1 {
+  width: 325px;
+}
+
+.item-2 {
+  width: 40%;
+}
+
+.button {
   width: 100%;
-  margin-bottom: 4px;
+  margin-bottom: 0.5em; 
 }
 
 .input-box {
-  background: rgb(168, 196, 92);
-  border: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
   border-radius: 10px;
-  margin: 25px auto 25px;
-  padding: 20px;
-  width: 60%;
+  min-width: 60%;
+  max-width: 80%;
+  margin: 2em;
+  padding-bottom: 2em;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-#lighting-form {
-  display: grid;
-  grid-gap: 4px;
-  grid-template-columns: repeat(3, 1fr);
+.result-box {
+  display: flex;
+  width: 100%;
+  height: 80%;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
 
-.header {
-  font-weight: bold;
-}
-.result {
-  background: rgb(255, 89, 89);
-  padding: 1px 2px;
-  text-align: right;
-  margin-bottom: 4px;
+.formbox {
+  flex: 1;
+  width: 100%;
 }
 
-.explanation {
-  font-weight: bold;
+/* These are for input fields */
+.form__group {
+  position: relative;
+  padding: 15px 0 0;
+  margin: 0 auto 10px auto;
+  width: 80%;
+}
+
+.form__field {
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid;
+  outline: 0;
+  font-size: 1.3rem;
+  padding: 7px 0;
+  background: transparent;
+}
+.form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  font-size: 1rem;
+  color: #3a4047;
+}
+
+.form__field:focus {  
+  padding-bottom: 6px;
+  border-width: 3px;
 }
 
 .variables {
   text-align: right;
-  padding: 1px 2px;
+}
+.header {
+  font-weight: bold;
+  text-align: center;
+  margin: 5px;
+}
+
+.result-group {
+  display: flex;
+}
+
+.result {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 70%;
+  font-weight: bold;
+  font-size: 6vw;
+}
+
+.unit {  
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 30%;
+  padding-left: 5px;
+  font-size: 3vw;
+}
+
+.hall-of-fame, .profile, .register, .settings {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: 10px;
+  width: 60%;
+  margin: 2em auto 2em auto;  
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.hall-box, .profile-box, .register-box, .login-box, .settings-box {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  padding-bottom: 2em; 
+}
+
+.form-group {
+  margin-bottom: 0.5em;
 }
 
 .title {
-  font-size: 1.5em;
+  font-size: 2em;
   font-weight: bold;
   margin: 10px;
-  grid-column: 1 / -1;
   text-align: center;
 }
 
-#appliance {
-  grid-column: span 2;
-  margin-bottom: 4px;
+#savers-table, #savings-table {
+  border-collapse: collapse;
+  width: 100%;
+  padding: 10px;
 }
 
-#bank {
-  grid-column: 1 / -1;
+tr {
+  text-align: left;
+  
+}
+
+tr:nth-child(even) {
+  background: #a1a5a9;
+}
+
+td, th {
+  padding: 5px;
+}
+
+.saver {
+  border: 1px solid black;
+  font-size: 1.5em;
 }
 
 .saving {
-  display: flex;
-  align-items: center;
   margin: 2px;
-  padding: 2px;
   animation-name: hide;
   animation-duration: 1s;
   animation-fill-mode: forwards;
   animation-play-state: paused;
 }
 
-.saving:after {
-  content: "";
-  display: table;
-  clear: both;
+
+.setting {
+  display:inline-block;
+  min-width: 20em;
 }
 
+
 .appliance-column, .kwh-column, .date-column, .delete-column, .rank-column, .saver-column {
-  float: left;
-  width: 25%;
 }
+
+.appliance-column {
+  width: 50%;
+}
+
+.kwh-column {
+  padding-right: 1em;
+  text-align: right;
+}
+
+.date-column {
+  width: 4em;
+}
+
+.delete-column {
+  width: 4em;
+}
+
 
 
 .delete {
@@ -123,7 +251,7 @@ input {
   outline: none;
 }
 
-@media (min-width: 600px) {
+/* @media (min-width: 600px) {
   * {
     font-size: medium;
   }
@@ -132,13 +260,7 @@ input {
     max-width: 30em;
   }
 
-  #lighting-form {
-    /* grid-template-columns: repeat(1fr, 4); */
-  }
-
   .explanation {
     grid-column: 1;
   }
-}
-
-/* https://css-tricks.com/snippets/css/a-guide-to-flexbox/#basics-and-terminology */
+} */

@@ -8,32 +8,50 @@
 {{ costs|json_script:"costs" }}
 {{ request.user.username|json_script:"username" }}
 
-<div class="calculator-background">
-    <div class="input-box">
-        <form action="{% url 'bank' %}" id="lighting-form" method="POST">
-            {% csrf_token %}
-            <div class="title">Switch Off</div>
-            <div class="explanation">Appliance</div>
-            <select class="selection" id="appliance" name="appliance"></select>
-            <div class="explanation">Consumption</div>
-            <input type="text" inputmode="decimal" class="variables" id="consumption" name="consumption">
-            <div class="units">Watts</div>
-            <div class="explanation">For</div>
-            <input type ="text" inputmode="decimal" class="variables" id="duration" name="duration">
-            <div class="units">Minutes</div>
-            <div class="title">You Save</div>
-            <div class="header">{{ costs.moneyUnit }}</div>
-            <div class="header">grams CO2e</div>
-            <div class="header">Trees</div>
-            <div class="result" id="kwh"></div>
-            <div class="result" id="money"></div>
-            <div class="result" id="trees"></div>
-            {% if user.is_authenticated %}
-            <input type="submit" class="button" id="bank" value="Bank!">
-            {% endif %}
-        </form>
+<div class="flexbox-container">
+    <div class="flexbox-content item-1 swatch_3">
+        <div class="input-box swatch_2">
+            <form action="{% url 'bank' %}" id="lighting-form" class ="formbox" method="POST">
+                {% csrf_token %}
+                <div class="title">Switch Off</div>
+                <div class="form__group field">
+                    <select class="form__field" name="appliance" id="appliance"></select>
+                    <label for="appliance" class="form__label">Appliance</label>
+                </div>
+                <div class="form__group field">
+                    <input type="text" inputmode="decimal" class="form__field variables" id="consumption" name="consumption">
+                    <label for="consumption" class="form__label">Consumption (Watts)</label>
+                </div>
+                <div class="form__group field">
+                    <input type="text" inputmode="decimal" class="form__field variables" id="duration" name="duration">
+                    <label for="duration" class="form__label">For how long? (minutes)</label>
+                </div>
+                {% if user.is_authenticated %}
+                <div class="form__group field">
+                    <input type="submit" class="button" id="bank" value="Bank!">
+                </div>
+                {% endif %}
+            </form>
+        </div>
+    </div>  
+    
+    <div class="flexbox-content item-2 swatch_4">
+        <div class="input-box swatch_2">
+            <div class="result-box">
+                <div class="title">Result</div>
+                <div class=result-group>
+                        <div class="result" id="kwh"></div>
+                        <div class="unit" id="energyUnit"></div>
+                </div>
+                <div class=result-group>
+                        <div class="result" id="money"></div>
+                        <div class="unit">{{ costs.moneyUnit }}</div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
 {% endblock %}
 
 {% block script %}
