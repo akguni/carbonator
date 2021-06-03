@@ -12,7 +12,7 @@ compose-stop:
 
 backup-database:
 	systemctl restart postgresql.service
-	pg_dump -U carbonator -W -F p carbonator -h localhost > ./docker/poster/carbonator.sql
+	pg_dump -U carbonator -W -F p carbonator -h localhost > ./docker/postgres/carbonator.sql
 
 wipe:
 	docker stop $(docker ps -qa) && docker system prune -af --volumes
