@@ -17,8 +17,10 @@ services:
         build: ./docker/website
         image: carbonator:latest
         container_name: django_image
-        # line below prevents website image exiting before tests are run
-        command: tail -f /dev/null
+        command: >
+            bash -c "./wait-for-postgres.sh &&
+            python manage.py migrate &&
+            python manage.py runserver 0.0.0.0:8000"
         volumes: *service-volumes
         environment: *app-variables
         ports:
