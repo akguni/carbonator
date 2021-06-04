@@ -13,4 +13,6 @@ urlpatterns = [
     path("undo/<int:id>", views.undo, name="undo"),
     path("halloffame", views.halloffame, name="halloffame"),
     path("settings", views.settings, name="settings"),
+    path("about", views.about, name="about"),
+    path("disclaimer", views.disclaimer, name="disclaimer"),
 ]

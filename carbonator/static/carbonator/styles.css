@@ -260,3 +260,8 @@ th {
   overflow: hidden;
   outline: none;
 }
+
+.long-textbox {
+  font-size: medium;
+  margin: 5%;  
+}

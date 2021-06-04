@@ -234,6 +234,13 @@ def setting_check(user):
     
     return settings
 
+
+def about(request):
+    return render(request, "carbonator/about.html")
+
+def disclaimer(request):
+    return render(request, "carbonator/disclaimer.html")
+
 # login, logout and register functions below this line
 
 def login_view(request):
