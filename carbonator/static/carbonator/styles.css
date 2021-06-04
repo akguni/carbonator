@@ -8,7 +8,7 @@
     opacity: 0;
     height: 100%;
     line-height: 100%;
-    margin: 0 px
+    margin: 0 px;
   }
   100% {
     opacity: 0;
@@ -28,14 +28,12 @@
   font-size: x-large;
 }
 
-
 /* to clear floats after a floating element */
 .clearfix::after {
   content: "";
   display: table;
   clear: both;
 }
-
 
 .flexbox-container {
   flex: 1;
@@ -62,7 +60,7 @@
 
 .button {
   width: 100%;
-  margin-bottom: 0.5em; 
+  margin-bottom: 0.5em;
 }
 
 .input-box {
@@ -117,7 +115,7 @@
   color: #3a4047;
 }
 
-.form__field:focus {  
+.form__field:focus {
   padding-bottom: 6px;
   border-width: 3px;
 }
@@ -144,7 +142,7 @@
   font-size: 6vw;
 }
 
-.unit {  
+.unit {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -153,21 +151,34 @@
   font-size: 3vw;
 }
 
-.hall-of-fame, .profile, .register, .settings {
+.hall-of-fame,
+.profile,
+.register,
+.settings {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   border-radius: 10px;
   width: 60%;
-  margin: 2em auto 2em auto;  
+  min-width: 350px;
+  margin: 2em auto 2em auto;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.hall-box, .profile-box, .register-box, .login-box, .settings-box {
+.hall-box,
+.profile-box,
+.register-box,
+.login-box,
+.settings-box {
   display: flex;
   flex-direction: column;
   width: 80%;
-  padding-bottom: 2em; 
+  padding-bottom: 2em;
+}
+
+.table-box {
+  display: flex;
+  width: 100%;
 }
 
 .form-group {
@@ -181,7 +192,9 @@
   text-align: center;
 }
 
-#savers-table, #savings-table {
+#savers-table,
+#savings-table {
+  flex: 1 1 auto;
   border-collapse: collapse;
   width: 100%;
   padding: 10px;
@@ -189,20 +202,20 @@
 
 tr {
   text-align: left;
-  
 }
 
 tr:nth-child(even) {
   background: #a1a5a9;
 }
 
-td, th {
+td,
+th {
   padding: 5px;
 }
 
 .saver {
   border: 1px solid black;
-  font-size: 1.5em;
+  font-size: min(4vw, 2em);
 }
 
 .saving {
@@ -213,15 +226,14 @@ td, th {
   animation-play-state: paused;
 }
 
-
 .setting {
-  display:inline-block;
+  display: inline-block;
   min-width: 20em;
 }
 
-
-.appliance-column, .kwh-column, .date-column, .delete-column, .rank-column, .saver-column {
-}
+.appliance-column, .kwh-column, .date-column, .delete-column {
+  font-size: min(3.5vw, 1em);
+} 
 
 .appliance-column {
   width: 50%;
@@ -240,8 +252,6 @@ td, th {
   width: 4em;
 }
 
-
-
 .delete {
   background-color: Transparent;
   background-repeat: no-repeat;
@@ -250,17 +260,3 @@ td, th {
   overflow: hidden;
   outline: none;
 }
-
-/* @media (min-width: 600px) {
-  * {
-    font-size: medium;
-  }
-
-  .calculator {
-    max-width: 30em;
-  }
-
-  .explanation {
-    grid-column: 1;
-  }
-} */
