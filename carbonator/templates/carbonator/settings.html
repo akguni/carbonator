@@ -2,6 +2,8 @@
 {% load static %}
 
 {% block body %}
+<!-- passing settings to javascript -->
+{{ settings|json_script:"settings" }}
 
 <div class="flexbox-content swatch_3">
     <div class="settings swatch_2">
@@ -10,20 +12,20 @@
             {% csrf_token %}
             <div class="title">User Settings</div>
             <label for="money-unit" class="setting">Units for Money</label>
-            <input type="text" id="money-unit" name="money-unit" value="{{ settings.moneyUnit }}"><br><br>
+            <input type="text" id="money-unit" name="money-unit" value="{{ settings.user.moneyUnit }}"><br><br>
             <label for="money" class="setting">Unit Cost per kWh</label>
-            <input type ="text" inputmode="decimal" id="money" name="money" value="{{ settings.money }}"><br><br>
+            <input type ="text" inputmode="decimal" id="money" name="money" value="{{ settings.user.money }}"><br><br>
             <label for="co2e" class="setting">kg CO2e per kWh</label>
-            <input type ="text" inputmode="decimal" id="co2e" name="co2e" value="{{ settings.co2e }}"><br><br>
+            <input type ="text" inputmode="decimal" id="co2e" name="co2e" value="{{ settings.user.co2e }}"><br><br>
             <label for="trees" class="setting">trees per kWh</label>
-            <input type ="text" inputmode="decimal" id="trees" name="trees" value="{{ settings.trees }}"><br><br>                      
+            <input type ="text" inputmode="decimal" id="trees" name="trees" value="{{ settings.user.trees }}"><br><br>                      
             <input type="submit" class="button" value="Save">
-            <input type="reset" class="button" value="Reset">
-
+            <input type="button" id="defaults" class="button" value="Defaults">
         </form>
     </div>
 </div>
 {% endblock %}
 
 {% block script %}
+<script src="{% static 'carbonator/settings.js' %}" defer></script>
 {% endblock %}

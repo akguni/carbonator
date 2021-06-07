@@ -37,7 +37,6 @@ def profile(request):
     })
 
 
-@csrf_exempt
 def delete(request, id):
     if request.method != "PUT":
         return JsonResponse({"error": "PUT request required."}, status=400)
@@ -67,7 +66,6 @@ def savingtotals(request):
     total_users = User.objects.count() - 1
     return total_saving, rank, total_users
 
-@csrf_exempt
 def undo(request, id):    
     saving = Saving.objects.get(id=id)
     saving.deleteFlag = False
@@ -118,7 +116,7 @@ def bank(request):
     energy = kWh * multiplier
     total_energy = total_kWh * multiplier
 
-    costs = setting_check(request.user)
+    costs = setting_check(request.user)['user']
 
     total_money = total_kWh * float(costs['money'])
     money_unit = costs['moneyUnit']
@@ -212,25 +210,27 @@ def settings(request):
     settings.co2e = float(request.POST["co2e"])
     settings.trees = float(request.POST["trees"])
     settings.save()
-
+    settings = setting_check(request.user)
     return render(request, "carbonator/settings.html", {
             "settings": settings
         })
 
 def setting_check(user):
 
-    if user.is_authenticated:
-        costs = Cost.objects.filter(user=user)
-        if costs.count() == 1:
-            settings = costs[0].serialize()
-            return settings
-
-    settings = {
+    # default values for carbon footprint calculations
+    settings = {'default': {
         'money': 0.315,
         'moneyUnit': 'Euro',
         'co2e': 0.40,
         'trees': 25e-4
+        }        
     }
+
+    settings['user'] = settings['default']
+    if user.is_authenticated:
+        costs = Cost.objects.filter(user=user)
+        if costs.count() == 1:
+            settings['user'] = costs[0].serialize()
     
     return settings
 
@@ -242,7 +242,6 @@ def disclaimer(request):
     return render(request, "carbonator/disclaimer.html")
 
 # login, logout and register functions below this line
-
 def login_view(request):
     if request.method == "POST":
 

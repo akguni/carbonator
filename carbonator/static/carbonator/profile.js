@@ -67,9 +67,16 @@ function addSaving(contents) {
 
 
 function deleteSaving(target) {
+
+    const csrftoken = getCookie('csrftoken');
+    const request = new Request(
+        '/delete/'  + target.id,
+        {headers: {'X-CSRFToken': csrftoken}}
+    );
     
-    fetch('delete/' + target.id, {
+    fetch(request, {
         method: 'PUT',
+        mode: 'same-origin',
     })
     .then(response => response.json())
     .then(response  => {
@@ -86,4 +93,21 @@ function deleteSaving(target) {
         message.append(undo);
         window.scrollTo(0,0);        
     })
+}
+
+// Generate CSRF token to be able to use in fetch
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
 }

@@ -170,7 +170,7 @@ CREATE TABLE public.carbonator_cost (
     money numeric(8,4) NOT NULL,
     "moneyUnit" character varying(16) NOT NULL,
     co2e numeric(12,2) NOT NULL,
-    trees numeric(6,2) NOT NULL,
+    trees numeric(10,4) NOT NULL,
     user_id integer NOT NULL
 );
 
@@ -637,6 +637,7 @@ COPY public.carbonator_appliance (id, name, watts, "typicalDuration") FROM stdin
 11	Dryer	3000.00	90
 12	Laptop Computer	30.00	60
 13	Desktop Computer	60.00	60
+14	Generic Appliance	1000.00	60
 \.
 
 
@@ -645,7 +646,7 @@ COPY public.carbonator_appliance (id, name, watts, "typicalDuration") FROM stdin
 --
 
 COPY public.carbonator_cost (id, money, "moneyUnit", co2e, trees, user_id) FROM stdin;
-1	100.0000	Pound	150.00	8.00	4
+1	0.3150	Euro	0.40	0.0025	4
 \.
 
 
@@ -824,6 +825,7 @@ COPY public.carbonator_saving (id, "timestamp", "energySaved", appliance_id, sav
 508	2021-06-03 16:25:55.624164+00	2.40	8	10	f
 509	2021-06-03 16:25:55.630226+00	1.00	9	7	f
 510	2021-06-03 16:25:55.636109+00	1.50	6	2	f
+511	2021-06-07 15:03:54.635075+00	1.00	14	4	f
 \.
 
 
@@ -832,9 +834,6 @@ COPY public.carbonator_saving (id, "timestamp", "energySaved", appliance_id, sav
 --
 
 COPY public.carbonator_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
-1	pbkdf2_sha256$216000$3ftFUz4BcXXf$jieJj4NKyJZTro7T//Ucwfyk0K6wsQKIvav4pBl/Gf4=	2021-05-10 08:44:32.795+00	t	superduper				t	t	2021-04-21 07:43:22.769+00
-3	pbkdf2_sha256$216000$nAs9Wl2dL4FK$8dbluwrjULCElxiuzaiaqMhN3MeL6xnnwUj47rGq+y0=	2021-05-07 13:39:11+00	f	beta			beta@mail.com	f	t	2021-04-30 08:39:04.756+00
-4	pbkdf2_sha256$216000$CFtxbrXLGRWq$pLg9+IxBQst5LmK286r5uN8jyw7pkT1poVgY6hr9gf4=	2021-05-07 11:18:11.427+00	f	gamma			gamma@mail.com	f	t	2021-05-03 05:28:46.171+00
 5	pbkdf2_sha256$216000$ob79iFrVefbX$U0LwyIvDsnQuCylNLm8JG02IS1N7tAs+ObWnU523aLk=	2021-05-04 08:53:59.125+00	f	delta			delta@mail.com	f	t	2021-05-04 08:53:58.96+00
 6	pbkdf2_sha256$216000$LZRpuxEt8d3c$Ig+qEsjgaVw2YybhlMhi8mrB4xrK2b2+DDzgMvrwC/M=	2021-05-06 12:20:20.796+00	f	epsilon			epsilon@mail.com	f	t	2021-05-04 08:54:23.482+00
 7	pbkdf2_sha256$216000$846XixUeOOh8$7lriJ8RuMEOLA7J3OuSEaTGdrBtdzMhy1X7LHzQfUs8=	2021-05-05 08:08:59.946+00	f	zeta			zeta@mail.com	f	t	2021-05-04 08:54:53.021+00
@@ -842,7 +841,10 @@ COPY public.carbonator_user (id, password, last_login, is_superuser, username, f
 9	pbkdf2_sha256$216000$bJcJ8GRKGVXW$DcVrV/TkB1usm3DkxcQJLziU/nQshpo6YBTy2+bmaMA=	2021-05-04 08:55:28.367+00	f	iota			iota@mail.com	f	t	2021-05-04 08:55:28.152+00
 10	pbkdf2_sha256$216000$3BDueSoovL3y$de+EVr51b4oOikTQ7TIBfvmxs6A5tSX5bSlwnIChcX4=	2021-05-04 10:24:35.612+00	f	kappa			kappa@mail.com	f	t	2021-05-04 09:06:05.44+00
 11	pbkdf2_sha256$216000$z8gHYDadRpQ9$Ha0JGh2g8VJORTy6bMfwbM530L4uPzGdt/LX+3fBxdM=	2021-05-04 10:09:24.968+00	f	lambda			lambda@mail.com	f	t	2021-05-04 10:09:24.823+00
-2	pbkdf2_sha256$216000$AD8q5986iOKs$Ij7SG421eaPuOOQsxUOvfMfCmzKWKz/jHwDLmePgC5Q=	2021-06-03 17:58:41.082476+00	f	alpha			alpha@mail.com	f	t	2021-04-21 07:57:09.739+00
+3	pbkdf2_sha256$216000$nAs9Wl2dL4FK$8dbluwrjULCElxiuzaiaqMhN3MeL6xnnwUj47rGq+y0=	2021-06-04 14:55:53.059104+00	f	beta			beta@mail.com	f	t	2021-04-30 08:39:04.756+00
+2	pbkdf2_sha256$216000$AD8q5986iOKs$Ij7SG421eaPuOOQsxUOvfMfCmzKWKz/jHwDLmePgC5Q=	2021-06-04 15:26:25.857605+00	f	alpha			alpha@mail.com	f	t	2021-04-21 07:57:09.739+00
+1	pbkdf2_sha256$216000$3ftFUz4BcXXf$jieJj4NKyJZTro7T//Ucwfyk0K6wsQKIvav4pBl/Gf4=	2021-06-07 14:46:29.737784+00	t	superduper				t	t	2021-04-21 07:43:22.769+00
+4	pbkdf2_sha256$216000$CFtxbrXLGRWq$pLg9+IxBQst5LmK286r5uN8jyw7pkT1poVgY6hr9gf4=	2021-06-07 14:47:38.853473+00	f	gamma			gamma@mail.com	f	t	2021-05-03 05:28:46.171+00
 \.
 
 
@@ -1190,6 +1192,9 @@ COPY public.django_admin_log (id, action_time, object_id, object_repr, action_fl
 321	2021-05-10 08:45:17.241+00	135	160.00 kwh on 2021-05-04 12:15:12.903841 Kettle	3		8	1
 322	2021-05-10 08:45:17.245+00	134	1200.00 kwh on 2021-05-04 12:15:12.890736 Oven	3		8	1
 323	2021-05-10 08:45:17.249+00	133	1500.00 kwh on 2021-05-04 12:15:12.883218 Hob Cooker Induction	3		8	1
+324	2021-06-07 10:09:42.51251+00	14	Generic Appliance 1000 w 60 min	1	[{"added": {}}]	7	1
+325	2021-06-07 14:44:21.492162+00	1	Cost object (1)	2	[{"changed": {"fields": ["Trees"]}}]	9	1
+326	2021-06-07 14:44:30.551001+00	1	Cost object (1)	2	[{"changed": {"fields": ["Trees"]}}]	9	1
 \.
 
 
@@ -1240,6 +1245,7 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 23	carbonator	0006_auto_20210504_1139	2021-05-17 09:27:27.104462+00
 24	carbonator	0007_auto_20210517_1127	2021-05-17 09:27:27.119057+00
 25	sessions	0001_initial	2021-05-17 09:27:27.14336+00
+26	carbonator	0008_auto_20210607_1656	2021-06-07 14:56:47.914591+00
 \.
 
 
@@ -1271,6 +1277,7 @@ wx6gp1waw9w4vuzeqj4xzbizidg5xf16	.eJxVjMsOwiAQRf-FtSHQkUdduvcbyAwMUjWQlHZl_HfbpA
 eqbhrirgyla1kq2avblgard9zvn1ozcl	.eJxVjMEOwiAQRP-FsyHLoit49O43EJYFqRqalPZk_HfbpAe9zGHem3mrEJe5hqXnKQyiLgrV4bfjmJ65bUAesd1HncY2TwPrTdE77fo2Sn5dd_fvoMZe13UhNB4tMRFnEiRj_dkRnSw5MIkBsECBdCTn14iUisHEGZ1YESD1-QKzEjcR:1lif2Z:W3SQ51dr9x-t4GLmZFxJEi4qgBcAiKYB9--jPfq8bp8	2021-05-31 15:20:19.490132+00
 f22u7em2zyh56mb1kqrl3wizvk0fwdpw	.eJxVjMEOwiAQRP-FsyHLoit49O43EJYFqRqalPZk_HfbpAe9zGHem3mrEJe5hqXnKQyiLgrV4bfjmJ65bUAesd1HncY2TwPrTdE77fo2Sn5dd_fvoMZe13UhNB4tMRFnEiRj_dkRnSw5MIkBsECBdCTn14iUisHEGZ1YESD1-QKzEjcR:1liuMm:BayxMF6noqsLY78EOcetIER4iAau90siPQ-wQiLC6y8	2021-06-01 07:42:12.957972+00
 ewuapfflcursrz5i1jbv37ivo3n1labo	.eJxVjMEOwiAQRP-FsyHLoit49O43EJYFqRqalPZk_HfbpAe9zGHem3mrEJe5hqXnKQyiLgrV4bfjmJ65bUAesd1HncY2TwPrTdE77fo2Sn5dd_fvoMZe13UhNB4tMRFnEiRj_dkRnSw5MIkBsECBdCTn14iUisHEGZ1YESD1-QKzEjcR:1lorc9:bpgNGzS-9OAz3uiWjxDqH8nzTESHRA4ENvWTDQNq15E	2021-06-17 17:58:41.0948+00
+qgdax6jaxen6mbdz7awe6lnhj3mixlz6	.eJxVjE0OwiAYBe_C2hCgINSl-56BfD8gVQNJaVfGu2uTLnT7Zua9RIRtLXHraYkzi4uw4vS7IdAj1R3wHeqtSWp1XWaUuyIP2uXUOD2vh_t3UKCXb604Gx61CgSQARHJcA6MPJ4JdHDWoIbsvEmDQkqZrWE3BJ-tHxxqEu8PJ-U5QA:1lqGXS:R_vYFqC0Uy9HhoKrDPAxjksoYooMQKGIxMoAxLiDYRg	2021-06-21 14:47:38.85659+00
 \.
 
 
@@ -1299,7 +1306,7 @@ SELECT pg_catalog.setval('public.auth_permission_id_seq', 36, true);
 -- Name: carbonator_appliance_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carbonator
 --
 
-SELECT pg_catalog.setval('public.carbonator_appliance_id_seq', 13, true);
+SELECT pg_catalog.setval('public.carbonator_appliance_id_seq', 14, true);
 
 
 --
@@ -1313,7 +1320,7 @@ SELECT pg_catalog.setval('public.carbonator_cost_id_seq', 1, true);
 -- Name: carbonator_saving_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carbonator
 --
 
-SELECT pg_catalog.setval('public.carbonator_saving_id_seq', 510, true);
+SELECT pg_catalog.setval('public.carbonator_saving_id_seq', 513, true);
 
 
 --
@@ -1341,7 +1348,7 @@ SELECT pg_catalog.setval('public.carbonator_user_user_permissions_id_seq', 1, fa
 -- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carbonator
 --
 
-SELECT pg_catalog.setval('public.django_admin_log_id_seq', 323, true);
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 326, true);
 
 
 --
@@ -1355,7 +1362,7 @@ SELECT pg_catalog.setval('public.django_content_type_id_seq', 9, true);
 -- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carbonator
 --
 
-SELECT pg_catalog.setval('public.django_migrations_id_seq', 25, true);
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 26, true);
 
 
 --

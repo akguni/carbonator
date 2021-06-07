@@ -48,7 +48,7 @@ class Cost(models.Model):
     money = models.DecimalField(max_digits=8, decimal_places=4)
     moneyUnit = models.CharField(max_length=16)
     co2e = models.DecimalField(max_digits=12, decimal_places=2)
-    trees = models.DecimalField(max_digits=6, decimal_places=2)
+    trees = models.DecimalField(max_digits=10, decimal_places=4)
 
     def serialize(self):
         return {

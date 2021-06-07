@@ -40,7 +40,7 @@ function recalculate() {
     };
 
     const money = document.getElementById("money");
-    money.innerText = (kWh * costs.money).toFixed(2);    
+    money.innerText = (kWh * costs.user.money).toFixed(2);    
 }
 
 function populateAppliances() {
@@ -48,8 +48,10 @@ function populateAppliances() {
     applianceList.innerHTML = "";
     appliances.forEach(appliance => {
         const option = document.createElement('option');
-        option.value = appliance.id;
+        option.value = appliance.id;        
         option.innerHTML = appliance.name;
+        // Select "Generic Appliance" as default
+        option.defaultSelected = (appliance.name = "Generic Appliance");
         applianceList.append(option);
     })
 }
