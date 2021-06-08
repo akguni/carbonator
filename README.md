@@ -1,5 +1,6 @@
+# CS50 W Final Project - Capstone
+---
 # Carbonator
-## Final Project for CS50 W : Capstone
 
 Carbonator is a web app designed to help you combat climate change by reducing your own carbon footprint.
 
@@ -8,16 +9,20 @@ It helps you find out how small actions, such as switching off a light bulb or t
 We all know intuitively that we should use less energy but it is not always
 easy to comprehend, let alone explain to others, the individual and cumulative impact of each small action.
 
-Carbonator helps quantify these impacts, putting them in perspective. That means using Carbonator 
-you can make better informed decisions about the trade-offs we all have to consider 
+Carbonator helps quantify these impacts, putting them in perspective. That means using Carbonator, you can make better informed decisions about the trade-offs we all have to consider 
 in our daily lives.
 
 It could also be used as an educational tool by teachers and parents.
 
+❮img src="images/carbonator_responsive.png" width="100"❯
+
 ## Distinctiveness and Complexity:
 
-Carbonator is a calculator with 
+Carbonator combines an online calculator with the ability to store compare users' achievements, adding a competitive element.
 
+All visitors are free to play around with the calculator and see how much energy they could save by switching off a light bulb for 30 minutes for example.
+
+If they register, they can "bank" a saving which presents them instantly with a congratulatory message with a random dimension which is best illustrated with an example:
 
 
 
