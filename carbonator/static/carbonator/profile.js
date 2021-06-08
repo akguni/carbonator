@@ -49,10 +49,10 @@ function addSaving(contents) {
     appliance.innerHTML = contents.appliance;
     const kwh = document.createElement('td');
     kwh.classList.add('kwh-column')
-    kwh.innerHTML = displayNumber(contents.energySaved);
+    kwh.innerHTML = parseFloat(contents.energySaved).toFixed(2);
     const date = document.createElement('td');
     date.classList.add('date-column');
-    date.innerHTML = displayDate(new Date(contents.timestamp));
+    date.innerHTML = new Date(contents.timestamp).toLocaleDateString('de-DE');
     const buttonCell = document.createElement('td');
     buttonCell.classList.add('delete-column');
     deleteButton = document.createElement('button');
@@ -82,7 +82,7 @@ function deleteSaving(target) {
     .then(response  => {
         const saved = document.getElementById('total-saving');
         totalSaving = response.total_saving;
-        saved.innerText = displayNumber(totalSaving);
+        saved.innerText = (totalSaving).toFixed(2);
         const rank = document.getElementById('rank');
         rank.innerText = response.rank;         
         const messageContainer = document.getElementById('message-container');        

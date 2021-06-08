@@ -20,7 +20,7 @@ function addSaving(contents) {
 
     const kwh = document.createElement('div');
     kwh.classList.add('kwh-column')
-    kwh.innerHTML = displayNumber(contents.energySaved);
+    kwh.innerHTML = (contents.energySaved).toFixed(0);
     saving.append(rank, appliance, kwh);
     document.querySelector('#savings-table').append(saving);
 };

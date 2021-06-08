@@ -104,7 +104,7 @@ requirements.txt
 
 ## How to run Carbonator:
 
-
+```pg_dump -U carbonator -W -F p carbonator -h localhost > ./docker/postgres/carbonator.sql```
 
 
 ## Other information:

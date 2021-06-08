@@ -200,9 +200,11 @@ def settings(request):
             "settings": settings
         })
     
-    settings = Cost.objects.get(user=request.user)
-    
-    if settings is None:
+    try:
+        settings = Cost.objects.get(user=request.user)
+
+    except Cost.DoesNotExist:
+        settings = []
         settings.user = request.user
 
     settings.money = float(request.POST["money"])
