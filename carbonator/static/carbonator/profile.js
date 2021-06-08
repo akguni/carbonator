@@ -52,7 +52,7 @@ function addSaving(contents) {
     kwh.innerHTML = parseFloat(contents.energySaved).toFixed(2);
     const date = document.createElement('td');
     date.classList.add('date-column');
-    date.innerHTML = new Date(contents.timestamp).toLocaleDateString('de-DE');
+    date.innerHTML = new Date(contents.timestamp).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: '2-digit' });
     const buttonCell = document.createElement('td');
     buttonCell.classList.add('delete-column');
     deleteButton = document.createElement('button');
