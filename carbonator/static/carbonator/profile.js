@@ -85,12 +85,15 @@ function deleteSaving(target) {
         saved.innerText = displayNumber(totalSaving);
         const rank = document.getElementById('rank');
         rank.innerText = response.rank;         
-        const message = document.getElementById('message-container');
+        const messageContainer = document.getElementById('message-container');        
+        message = document.createElement('div');
+        message.id = "system-message";
         const undo = document.createElement('a');
         undo.href = '/undo/' + target.id;
         undo.innerText = 'Undo';
         message.innerText = "Saving deleted. ";
         message.append(undo);
+        messageContainer.append(message);
         window.scrollTo(0,0);        
     })
 }

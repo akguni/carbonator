@@ -20,7 +20,7 @@ services:
         command: >
             bash -c "./wait-for-postgres.sh &&
             python manage.py migrate &&
-            python manage.py runserver 0.0.0.0:8000"
+            python manage.py test"
         volumes: *service-volumes
         environment: *app-variables
         ports:
@@ -32,9 +32,6 @@ services:
     postgres:
         image: postgres:latest
         container_name: postgres_image
-        # For testing and development
-        # postgres only needs to be accessible
-        # to django docker image which does not need exposing port 
         # ports:
         #     - "5432:5432"
         environment: *database-variables
