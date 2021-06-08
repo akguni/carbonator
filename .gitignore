@@ -13,3 +13,5 @@ media
 requirements
 To Django
 random_saving_generator.py
+Makefile
+wait-for-postgre.sh
