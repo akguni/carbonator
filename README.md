@@ -14,7 +14,7 @@ in our daily lives.
 
 It could also be used as an educational tool by teachers and parents.
 
-❮img src="images/carbonator_responsive.png" width="100"❯
+<img src="images/carbonator_main.png" style="display: block; margin-left: auto; margin-right: auto" width="80%">
 
 ## Distinctiveness and Complexity:
 
@@ -22,11 +22,22 @@ Carbonator combines an online calculator with the ability to store compare users
 
 All visitors are free to play around with the calculator and see how much energy they could save by switching off a light bulb for 30 minutes for example.
 
-If they register, they can "bank" a saving which presents them instantly with a congratulatory message with a random dimension which is best illustrated with an example:
+If they register, they can "bank" a saving which presents them instantly with a congratulatory message with a random dimension: 
 
+<img src="images/carbonator_motivator.png" style="display: block; margin-left: auto; margin-right: auto" width="50%">
 
+Since the scale of savings can vary significantly, the message is constructed using some random elements to keep it meaningful and reduce repetition.
 
+When they click on their username they are taken to Profile page where they can see the total energy they saved and where they stand compared to other users. This page also gives them the possibility to delete incorrect savings. There is an undo function before any saving is permanently deleted.
 
+The app is written in Django and Javascript as similar to previous projects. However, I have used the following technologies extensively for the first time, during the course of developing this project:
+
+- **Git branching and merge** for developing various features, whilst keeping the main app intact
+- **Postgres** for back end database: Migrated from mysql
+- Testing: **Django Tests and Selenium**
+- **Github Actions**: For testing each commit to the master and other branches as needed
+- **Docker**: The app runs fully in 2 docker containers, one for the website and one for the database. Data is saved on a persistent volume which is normally preserved between sessions unless destroyed intentionally.
+- **CSRF token for fetch scripts** which means I did not have to use "CSRF exempt" in Django routes
 ## List of files and their contents:
 
 ### Docker Compose files
@@ -85,12 +96,11 @@ Defines 4 models used by django for the application.
 - Cost: For users who choose their own monetary and environmental cost coefficients
 
 #### Javascript Files
+These carry out 
 
 ##### carbonator/static/carbonator/halloffame.js
 
 ##### carbonator/static/carbonator/layout.js
-
-##### carbonator/static/carbonator/IntlNumberFormat.js
 
 carbonator/static/carbonator/settings.js
 carbonator/static/carbonator/layout.css
