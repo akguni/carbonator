@@ -15,6 +15,7 @@ window.onscroll = () => {
     }
 };
 
+// delete animation
 document.addEventListener('click', event => {
     const element = event.target;
     if (element.className === 'delete') {
@@ -26,6 +27,7 @@ document.addEventListener('click', event => {
         })};
     });
 
+// retrieve savings from views.py one page at a time
 function retrieveNext() {
     if (counter > numberSavings) {
         return;
@@ -41,6 +43,7 @@ function retrieveNext() {
     })
 };
 
+// build saving row
 function addSaving(contents) {
     const saving = document.createElement('tr');
     saving.classList.add('saving');
@@ -66,6 +69,7 @@ function addSaving(contents) {
 };
 
 
+// mark a saving for deletion
 function deleteSaving(target) {
 
     const csrftoken = getCookie('csrftoken');
@@ -88,6 +92,7 @@ function deleteSaving(target) {
         const messageContainer = document.getElementById('message-container');        
         message = document.createElement('div');
         message.id = "system-message";
+        // build a link to reverse the delete flag i.e. undo
         const undo = document.createElement('a');
         undo.href = '/undo/' + target.id;
         undo.innerText = 'Undo';
