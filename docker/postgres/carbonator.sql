@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 12.7 (Ubuntu 12.7-0ubuntu0.20.04.1)
--- Dumped by pg_dump version 12.7 (Ubuntu 12.7-0ubuntu0.20.04.1)
+-- Dumped from database version 13.3 (Debian 13.3-1.pgdg100+1)
+-- Dumped by pg_dump version 13.3 (Debian 13.3-1.pgdg100+1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -814,6 +814,11 @@ COPY public.carbonator_saving (id, "timestamp", "energySaved", appliance_id, sav
 509	2021-06-03 16:25:55.630226+00	1.00	9	7	f
 510	2021-06-03 16:25:55.636109+00	1.50	6	2	f
 511	2021-06-07 15:03:54.635075+00	1.00	14	4	f
+514	2021-06-09 12:43:22.74009+00	1.00	14	12	f
+515	2021-06-09 12:43:27.861019+00	1.50	6	12	f
+516	2021-06-09 12:43:31.921026+00	1.00	10	12	f
+517	2021-06-09 12:43:36.917432+00	4.50	11	12	f
+518	2021-06-09 13:52:02.968493+00	1.00	14	13	f
 \.
 
 
@@ -823,7 +828,6 @@ COPY public.carbonator_saving (id, "timestamp", "energySaved", appliance_id, sav
 
 COPY public.carbonator_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
 5	pbkdf2_sha256$216000$ob79iFrVefbX$U0LwyIvDsnQuCylNLm8JG02IS1N7tAs+ObWnU523aLk=	2021-05-04 08:53:59.125+00	f	delta			delta@mail.com	f	t	2021-05-04 08:53:58.96+00
-6	pbkdf2_sha256$216000$LZRpuxEt8d3c$Ig+qEsjgaVw2YybhlMhi8mrB4xrK2b2+DDzgMvrwC/M=	2021-05-06 12:20:20.796+00	f	epsilon			epsilon@mail.com	f	t	2021-05-04 08:54:23.482+00
 7	pbkdf2_sha256$216000$846XixUeOOh8$7lriJ8RuMEOLA7J3OuSEaTGdrBtdzMhy1X7LHzQfUs8=	2021-05-05 08:08:59.946+00	f	zeta			zeta@mail.com	f	t	2021-05-04 08:54:53.021+00
 8	pbkdf2_sha256$216000$7wndM1uT6020$kiskxqsf04SPuZ4MQ3iv5J8dJqRxJ3pa7VvXxRaVBUU=	2021-05-04 08:55:13.264+00	f	eta			eta@mail.com	f	t	2021-05-04 08:55:13.119+00
 9	pbkdf2_sha256$216000$bJcJ8GRKGVXW$DcVrV/TkB1usm3DkxcQJLziU/nQshpo6YBTy2+bmaMA=	2021-05-04 08:55:28.367+00	f	iota			iota@mail.com	f	t	2021-05-04 08:55:28.152+00
@@ -832,7 +836,10 @@ COPY public.carbonator_user (id, password, last_login, is_superuser, username, f
 2	pbkdf2_sha256$216000$AD8q5986iOKs$Ij7SG421eaPuOOQsxUOvfMfCmzKWKz/jHwDLmePgC5Q=	2021-06-04 15:26:25.857605+00	f	alpha			alpha@mail.com	f	t	2021-04-21 07:57:09.739+00
 1	pbkdf2_sha256$216000$3ftFUz4BcXXf$jieJj4NKyJZTro7T//Ucwfyk0K6wsQKIvav4pBl/Gf4=	2021-06-07 14:46:29.737784+00	t	superduper				t	t	2021-04-21 07:43:22.769+00
 4	pbkdf2_sha256$216000$CFtxbrXLGRWq$pLg9+IxBQst5LmK286r5uN8jyw7pkT1poVgY6hr9gf4=	2021-06-07 14:47:38.853473+00	f	gamma			gamma@mail.com	f	t	2021-05-03 05:28:46.171+00
-3	pbkdf2_sha256$216000$nAs9Wl2dL4FK$8dbluwrjULCElxiuzaiaqMhN3MeL6xnnwUj47rGq+y0=	2021-06-08 18:38:28.410902+00	f	beta			beta@mail.com	f	t	2021-04-30 08:39:04.756+00
+3	pbkdf2_sha256$216000$nAs9Wl2dL4FK$8dbluwrjULCElxiuzaiaqMhN3MeL6xnnwUj47rGq+y0=	2021-06-08 18:44:38.849156+00	f	beta			beta@mail.com	f	t	2021-04-30 08:39:04.756+00
+12	pbkdf2_sha256$260000$Yrwuzk814V0kgIpQmPdRtS$HekMxd67o0joJ/JMOrLrm5E0eD8mk/+ba3LWGFNWmRk=	2021-06-09 12:43:21.344895+00	f	another				f	t	2021-06-09 12:43:21.088327+00
+6	pbkdf2_sha256$260000$dohuUBPhjvOja6jtH1xohD$FGYSmmdHiuaQMPcOB+3eHp6XLUjcJnJpy5sgFjkjph8=	2021-06-09 13:50:48.88715+00	f	epsilon			epsilon@mail.com	f	t	2021-05-04 08:54:23.482+00
+13	pbkdf2_sha256$260000$HSCEAdnePfkUu7pr5Xbwnf$fyONPR7ri/ZEaBqtQb73SvXvpgEWf8HumY9jbMnGpI0=	2021-06-09 13:51:59.266782+00	f	test				f	t	2021-06-09 13:51:59.077338+00
 \.
 
 
@@ -1266,6 +1273,7 @@ eqbhrirgyla1kq2avblgard9zvn1ozcl	.eJxVjMEOwiAQRP-FsyHLoit49O43EJYFqRqalPZk_HfbpA
 f22u7em2zyh56mb1kqrl3wizvk0fwdpw	.eJxVjMEOwiAQRP-FsyHLoit49O43EJYFqRqalPZk_HfbpAe9zGHem3mrEJe5hqXnKQyiLgrV4bfjmJ65bUAesd1HncY2TwPrTdE77fo2Sn5dd_fvoMZe13UhNB4tMRFnEiRj_dkRnSw5MIkBsECBdCTn14iUisHEGZ1YESD1-QKzEjcR:1liuMm:BayxMF6noqsLY78EOcetIER4iAau90siPQ-wQiLC6y8	2021-06-01 07:42:12.957972+00
 ewuapfflcursrz5i1jbv37ivo3n1labo	.eJxVjMEOwiAQRP-FsyHLoit49O43EJYFqRqalPZk_HfbpAe9zGHem3mrEJe5hqXnKQyiLgrV4bfjmJ65bUAesd1HncY2TwPrTdE77fo2Sn5dd_fvoMZe13UhNB4tMRFnEiRj_dkRnSw5MIkBsECBdCTn14iUisHEGZ1YESD1-QKzEjcR:1lorc9:bpgNGzS-9OAz3uiWjxDqH8nzTESHRA4ENvWTDQNq15E	2021-06-17 17:58:41.0948+00
 qgdax6jaxen6mbdz7awe6lnhj3mixlz6	.eJxVjE0OwiAYBe_C2hCgINSl-56BfD8gVQNJaVfGu2uTLnT7Zua9RIRtLXHraYkzi4uw4vS7IdAj1R3wHeqtSWp1XWaUuyIP2uXUOD2vh_t3UKCXb604Gx61CgSQARHJcA6MPJ4JdHDWoIbsvEmDQkqZrWE3BJ-tHxxqEu8PJ-U5QA:1lqGXS:R_vYFqC0Uy9HhoKrDPAxjksoYooMQKGIxMoAxLiDYRg	2021-06-21 14:47:38.85659+00
+6wz4v7epakimdkmell04uvtfpse602lv	.eJxVjDsOwjAQBe_iGlnx-k9JzxmstXdNAiiW4qRC3B0ipYD2zcx7iYTbOqat85ImEmfhxOl3y1gePO-A7jjfmixtXpcpy12RB-3y2oifl8P9Oxixj9_aszMxDAGCNjaQJVsQIiHzYLIDUF7FEJCsMWiVi9UX1AxVV1IA6MT7A8WBN1M:1lqybY:oq34FzYrXeC11fPQN7xIRvrJr6kttYiJfr0O5igvmpA	2021-06-23 13:50:48.890667+00
 \.
 
 
@@ -1308,7 +1316,7 @@ SELECT pg_catalog.setval('public.carbonator_cost_id_seq', 1, true);
 -- Name: carbonator_saving_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carbonator
 --
 
-SELECT pg_catalog.setval('public.carbonator_saving_id_seq', 513, true);
+SELECT pg_catalog.setval('public.carbonator_saving_id_seq', 518, true);
 
 
 --
@@ -1322,7 +1330,7 @@ SELECT pg_catalog.setval('public.carbonator_user_groups_id_seq', 1, false);
 -- Name: carbonator_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: carbonator
 --
 
-SELECT pg_catalog.setval('public.carbonator_user_id_seq', 11, true);
+SELECT pg_catalog.setval('public.carbonator_user_id_seq', 13, true);
 
 
 --

@@ -98,17 +98,18 @@ def bank(request):
     
     kWh  = float(kWh)
 
+
+    # If the saving is small, express it in Wh rather than kWh
     if kWh < 1:
         multiplier = 1000
         energy = kWh * 1000
         energy_unit = "Wh"
-
-
     else:
         multiplier = 1
         energy = kWh
         energy_unit = "kWh"                
 
+    # Build a random motivational message based on the saving
     frequency_index = random.randint(0, len(periods) - 3)
     duration_index = random.randint(frequency_index + 1, len(periods) - 1)
 
@@ -129,7 +130,6 @@ def bank(request):
     co2e = (total_co2e >= 1) * (
         f"you will avoid {total_co2e:.0f} kg of CO\u2082 emissions to the atmosphere"
     )
-
 
     impact = random.choice([watt, co2e]) if total_co2e>=1 else watt
 
@@ -158,16 +158,16 @@ def bank(request):
     
     return JsonResponse({'motivator': motivator})
 
+
 def savings(request):
-    
+  
     savings = Saving.objects.filter(saver=request.user)
 
     # clean up records flagged for deletion
     savings.filter(deleteFlag=True).delete()
     numberSavings = len(savings)
  
-
-    # Get start and end points
+    # Get start and end points for the savings to be handed over to the page
     start = int(request.GET.get("start"))
     end = int(request.GET.get("end")) + 1
 
@@ -180,18 +180,14 @@ def savings(request):
     })
 
 
+# Present the top 10 savers in decreasing order 
 def halloffame(request):
-
     halloffame = User.objects.exclude(is_superuser=True).annotate(totalSaved=Sum('savings__energySaved', filter=Q(savings__deleteFlag__exact=False))).order_by(F('totalSaved').desc(nulls_last=True))[:10]
 
     return render(request, "carbonator/halloffame.html", {
         "halloffame": halloffame,
     })
 
-
-
-
-@csrf_exempt
 @login_required
 def settings(request):
     if request.method != "POST":
@@ -216,6 +212,7 @@ def settings(request):
     return render(request, "carbonator/settings.html", {
             "settings": settings
         })
+
 
 def setting_check(user):
 

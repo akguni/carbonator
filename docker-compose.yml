@@ -32,9 +32,7 @@ services:
     postgres:
         image: postgres:latest
         container_name: postgres_image
-        # For testing and development
-        # postgres only needs to be accessible
-        # to django docker image which does not need exposing port 
+        # not necessary to expose the pg port outside containers
         # ports:
         #     - "5432:5432"
         environment: *database-variables
