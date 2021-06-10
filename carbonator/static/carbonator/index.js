@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     recalculate();
 })
 
+
 function events() {
     document.getElementById("appliance").addEventListener('change', () => {
         initializeConsumption();
@@ -64,12 +65,12 @@ function initializeConsumption() {
 }
 
 function bank(event) {
-
     event.preventDefault();
     const appliance = document.getElementById("appliance").value;
     const duration = document.getElementById("duration").value;
     const consumption = document.getElementById("consumption").value;
     kWh = consumption / 1000 * duration / 60;
+    // in order to avoid csrf exempt in views.py use the getCookie function
     const csrftoken = getCookie('csrftoken');
     const request = new Request(
         '/bank',
@@ -86,6 +87,7 @@ function bank(event) {
     })
     .then(response => response.json())
     .then(output => {
+        // populate the motivating message after each bank
         const messageContainer = document.getElementById("message-container")
         messageContainer.innerText = ""
         message = document.createElement('div');
