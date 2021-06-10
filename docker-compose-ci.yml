@@ -18,7 +18,12 @@ services:
         image: carbonator:latest
         container_name: django_image
         # line below prevents website image exiting before tests are run
-        command: tail -f /dev/null
+        command: >
+            bash -c "
+            until PGPASSWORD="carbonator" psql -h "postgres" -U "carbonator" -c '\q';
+            do sleep 1;
+            done && 
+            tail -f /dev/null"
         volumes: *service-volumes
         environment: *app-variables
         ports:
