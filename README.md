@@ -30,7 +30,7 @@ All visitors are free to play around with the calculator and see how much energy
 
 If they register, they can "bank" a saving which presents them instantly with a congratulatory message with a random dimension: 
 
-<img src="images/carbonator_motivator.png" style="display: block; margin-left: auto; margin-right: auto" width="50%">
+<p align="center"><img src="images/carbonator_motivator.png" width="50%"></p>
 
 Since the scale of savings can vary significantly, the message is constructed using some random elements to keep it meaningful and reduce repetition.
 
@@ -212,7 +212,7 @@ Builds docker image for django website container
 
 
 **docker/postgres/carbonator.sql**
-
+Backup file which populates the Postgres database when it is created. Initially contains dummy data for about 12 users to view full functionality of the app. It can be overwritten with the backup command explained in "How to run the app" section.
 
 
 **docker/postgres/Dockerfile**

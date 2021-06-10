@@ -28,9 +28,7 @@ jobs:
         sudo apt-get install chromium-browser
         python3 -m pip install --upgrade pip
 
-        # this test is not relevant to docker containers but
-        # it is referencing the requirements.txt file in a subdirectory
-        # purely to avoid duplicating it
+        # requirements file in docker folder is also applicable to vm
 
         pip3 install -r ./docker/website/requirements.txt
         python3 manage.py test
@@ -41,6 +39,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the docker-compose stack
-      run: docker-compose  -f docker-compose-ci.yml up -d
+      run: docker-compose -f docker-compose-ci.yml up -d
     - name: Run test suite
-      run: docker exec django_image python manage.py test
+      run: docker exec django_image python3 manage.py test
