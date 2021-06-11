@@ -85,7 +85,7 @@ function deleteSaving(target) {
     .then(response => response.json())
     .then(response  => {
         const saved = document.getElementById('total-saving');
-        totalSaving = response.total_saving;
+        totalSaving = parseFloat(response.total_saving);
         saved.innerText = (totalSaving).toFixed(2);
         const rank = document.getElementById('rank');
         rank.innerText = response.rank;         
