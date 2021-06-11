@@ -27,7 +27,9 @@ services:
         build: ./docker/website
         image: carbonator:latest
         container_name: django_image
-        # line below prevents website image exiting before tests are run
+        
+        # commands below makes the website wait until database is ready 
+        # and then prevent website image exiting before tests are run
         command: >
             bash -c "
             until PGPASSWORD="carbonator" psql -h "postgres" -U "carbonator" -c '\q';
