@@ -13,16 +13,26 @@ x-app-variables: &app-variables
     POSTGRES_HOST: postgres    
 
 services:
+    postgres:
+        image: postgres:latest
+        container_name: postgres_image
+        environment: *database-variables
+
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U postgres"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+
+        volumes:
+            - db-data:/var/lib/postgresql/data
+
     website:
         build: ./docker/website
         image: carbonator:latest
         container_name: django_image
         command: >
-            bash -c "
-            until PGPASSWORD="carbonator" psql -h "postgres" -U "carbonator" -c '\q';
-            do sleep 1;
-            done && 
-            
+            bash -c "            
             python manage.py migrate &&
             python manage.py test
             "
@@ -32,16 +42,8 @@ services:
             - "8000:8000"
         
         depends_on:
-            - postgres
-
-    postgres:
-        image: postgres:latest
-        container_name: postgres_image
-        # ports:
-        #     - "5432:5432"
-        environment: *database-variables
-        volumes:
-            - db-data:/var/lib/postgresql/data
+            postgres:
+                condition: service_healthy
 
 volumes:
     db-data:

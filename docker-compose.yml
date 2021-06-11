@@ -19,9 +19,6 @@ services:
         container_name: django_image
         command: >
             bash -c "
-            until PGPASSWORD="carbonator" psql -h "postgres" -U "carbonator" -c '\q';
-            do sleep 1;
-            done && 
             python manage.py migrate &&
             python manage.py runserver 0.0.0.0:8000
             "
@@ -31,15 +28,20 @@ services:
             - "8000:8000"
         
         depends_on:
-            - postgres
+            postgres:
+                condition: service_healthy
 
     postgres:
         image: postgres:latest
         container_name: postgres_image
-        # not necessary to expose the pg port outside containers
-        # ports:
-        #     - "5432:5432"
         environment: *database-variables
+
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U postgres"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+
         volumes:
             - db-data:/var/lib/postgresql/data
 
