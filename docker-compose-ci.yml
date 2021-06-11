@@ -13,7 +13,17 @@ x-app-variables: &app-variables
     POSTGRES_HOST: postgres    
 
 services:
-    website:
+
+    postgres:
+        image: postgres:latest
+        container_name: postgres_image
+        ports:
+            - "5432:5432"
+        environment: *database-variables
+        volumes:
+            - db-data:/var/lib/postgresql/data
+
+    website:    
         build: ./docker/website
         image: carbonator:latest
         container_name: django_image
@@ -26,16 +36,6 @@ services:
         
         depends_on:
             - postgres
-
-    postgres:
-        image: postgres:latest
-        container_name: postgres_image
-        ports:
-            - "5432:5432"
-        environment: *database-variables
-        volumes:
-            - db-data:/var/lib/postgresql/data
-
 volumes:
     db-data:
     
