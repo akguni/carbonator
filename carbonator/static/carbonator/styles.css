@@ -262,6 +262,9 @@ th {
 }
 
 .long-textbox {
-  font-size: medium;
   margin: 5%;  
+}
+
+.long-textbox > p {
+  font-size: 2vh;
 }

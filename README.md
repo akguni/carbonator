@@ -56,11 +56,13 @@ The app is written in Python -  Django - and Javascript, similar to previous CS5
 
 ## How to run the app:
 
-The instructions here are based on an Ubuntu 20.04 LTS installation with docker and docker-compose installed. Even though it works without problems stand-alone after installing Python 3, it is is much simpler to run the app using docker containers.
+The instructions here are based on an Ubuntu 20.04 LTS installation with docker and docker-compose installed. Even though it works without problems stand-alone, it is is much simpler to run the app using docker containers therefore this is the recommended method.
 
 After running the command `docker-compose up -d` in capstone directory will install django, python and all other dependencies in 2 docker docker containers, and even populate the database with some dummy data to play around with.
 
 In order to access the app, please visit `http://0.0.0.0:8000` in a browser on the host computer, or indeed from anywhere else on the local network using the ip address of the host computer and port 8000.
+
+"Email Us" link on the footer triggers the host device to compose an email to a fictional address carbonator@carbonator.com.
 
 The containers and the app can be stopped using `docker-compose down`.
 
@@ -78,155 +80,166 @@ Then issue the following command to force Docker to rebuild the postgres contain
 
 Next time you start the application with docker-compose up it should contain the data from back up.
 
+
+## requirements.txt File
+
+This file is in /docker/website subfolder because it is used by the website container dockerfile. If you choose to build the app without docker containers directly from capstone directory, the dependencies can be installed with `pip3 install -r ./docker/website/requirements.txt` provided that Python 3 is already installed on host computer.
+
 ## Security:
 
 This is a development build and therefore does not contain all security features which would be needed for using it in production. For adding/removing users, appliances etc. it is possible to use Django Admin interface with the following credentials.
 
 > 
 > django admin username:    superduper
+
 > django admin password:    magnificient
 
 Postgres credentials if needed:
 
 > postgres database:        carbonator
+
 > username:                 carbonator
+
 > password:                 carbonator
 
 
 ## List of files and their contents:
 
-### Docker Compose files
-docker-compose.yml
-
-This is the one to build and run the app.
-
-
-
 ### CI/CD GitHub 
 
-**carbonator/tests.py**
+* **carbonator/tests.py**
 
-Django and Selenium tests
-
-
-**.github/workflows/carbonator_tests master.yml:**
-
-Builds and run tests on the app first on a virtual machine without docker and then inside docker containers.
+    Django and Selenium tests
 
 
-**docker-compose-test.yml**
+* **.github/workflows/carbonator_tests master.yml:**
 
-For testing on your own computer.
+    Builds and run tests on the app first on a virtual machine without docker and then inside docker containers.
 
+### Docker Files
 
-**docker-compose-ci.yml**
+* **docker-compose.yml**
 
-Used by github actions to run tests on the master branch.
+    Builds the containers and runs the app.
 
-### Django Files
-HTML Templates
+* **docker-compose-test.yml**
 
-**carbonator/templates/carbonator/profile.html:**
-
-Page to display savings achieved by logged in users.
+    For testing the app in containers.
 
 
-**carbonator/templates/carbonator/index.html:**
+* **docker-compose-ci.yml**
 
-Main landing page. Calculates energy saving impact based on criteria given on a form. Allows to "bank" savings for registered users.
-
-
-**carbonator/templates/carbonator/disclaimer.html:**
-
-Recommends to take values as a guidance and use own assumptions where applicable.
+    Used by github actions to run tests on the master branch.
 
 
-**carbonator/templates/carbonator/layout.html:**
+* **Website Container**
 
-Used for common formatting such as header and footer across all pages.
+    * **docker/website/Dockerfile**
 
-
-**carbonator/templates/carbonator/register.html:**
-
-Register new users.
+        Builds docker image for django website container
 
 
-**carbonator/templates/carbonator/login.html:**
+    * **docker/website/requirements.txt**
 
-Login existing users.
+        Python requirements file to run the application
 
+* **Postgres Database Container**
 
-**carbonator/templates/carbonator/settings.html:**
+    * **docker/postgres/Dockerfile**
 
-Allows users to change some variables such as money units and cost of electricity.
+        Builds docker image for Postgres database.
 
+    * **docker/postgres/carbonator.sql**
 
-**carbonator/templates/carbonator/about.html:**
-
-High level overview and purpose of the app.
-
-
-**carbonator/templates/carbonator/halloffame.html:**
-
-Shows a list of 10 registered users with the largest amount "banked" energy savings.
+        Backup file which populates the Postgres database when it is created. Initially contains dummy data for about 12 users to view full functionality of the app. It can be overwritten with the backup command explained in "How to run the app" section.
 
 
+### Django models:
 
-**carbonator/models.py:**
+* **carbonator/models.py:**
 
-Django models:
+    - User: Self explanatory
+    - Appliance: names and typical consumption and usage data for various appliances
+    - Saving: To store savings for registered users
+    - Cost: For users who choose their own monetary and environmental cost coefficients
 
-- User: Self explanatory
-- Appliance: names and typical consumption and usage data for various appliances
-- Saving: To store savings for registered users
-- Cost: For users who choose their own monetary and environmental cost coefficients
+
+### HTML Templates
+
+* **carbonator/templates/carbonator/index.html:**
+
+    Main landing page. Calculates energy saving impact based on criteria given on a form. Allows to "bank" savings for registered users.
+
+
+* **carbonator/templates/carbonator/profile.html:**
+
+    Page to display savings achieved by logged in users.
+
+
+* **carbonator/templates/carbonator/halloffame.html:**
+
+    Shows a list of 10 registered users with the largest amount "banked" energy savings.
+
+
+* **carbonator/templates/carbonator/settings.html:**
+
+    Allows users to change some variables such as money units and cost of electricity.
+
+
+* **carbonator/templates/carbonator/disclaimer.html:**
+
+    Recommends to take values as a guidance and use own assumptions where applicable.
+
+
+* **carbonator/templates/carbonator/register.html:**
+
+    Register new users.
+
+
+* **carbonator/templates/carbonator/login.html:**
+
+    Login existing users.
+
+
+* **carbonator/templates/carbonator/about.html:**
+
+    High level overview and purpose of the app.
+
+
+* **carbonator/templates/carbonator/layout.html:**
+
+    Used for common formatting such as header and footer across all pages.
 
 ### Javascript Files
 
-**carbonator/static/carbonator/layout.js**
+* **carbonator/static/carbonator/layout.js**
 
-Resizes the banner links to a hamburger-style menu for smaller screens.
+    Resizes the banner links to a hamburger-style menu for smaller screens.
 
+* **carbonator/static/carbonator/index.js**
 
-**carbonator/static/carbonator/settings.js**
+    Populates selection list for appliances. Recalculates energy use after each selection or change to inputs such as duration. It also populates the confirmation message after each bank action. Includes a CSRF token generator.
 
-Adds functionality to "Reset" button to restore default values
+* **carbonator/static/carbonator/profile.js**
 
-**carbonator/static/carbonator/profile.js**
+    Lists each saving the current user has banked. Endless-scroll when the number of savings exceed screen height. Adds delete button which activates an animation when clicked. Confirmation message and undo link.
 
-Lists each saving the current user has banked. Endless-scroll when the number of savings exceed screen height. Adds delete button which activates an animation when clicked. Confirmation message and undo link.
+* **carbonator/static/carbonator/settings.js**
 
-**carbonator/static/carbonator/index.js**
-
-Populates selection list for appliances. Recalculates energy use after each selection or change to inputs such as duration. It also populates the confirmation message after each bank action. Includes a CSRF token generator.
-
-## CSS Files
-
-**carbonator/static/carbonator/layout.css**
-**carbonator/static/carbonator/styles.css**
-
-**docker/website/Dockerfile**
-
-Builds docker image for django website container
+    Adds functionality to "Reset" button to restore default values.
 
 
+### CSS Files
 
-**docker/postgres/carbonator.sql**
-Backup file which populates the Postgres database when it is created. Initially contains dummy data for about 12 users to view full functionality of the app. It can be overwritten with the backup command explained in "How to run the app" section.
+* **carbonator/static/carbonator/layout.css**
+* **carbonator/static/carbonator/styles.css**
 
-
-**docker/postgres/Dockerfile**
-
-Builds docker image for Postgres database.
-
-## Miscalleneaous
-
-**.gitignore**
-List of files to be ignored by GitHub. Includes some generic Django files and my own sketchpad files which are not necessary for the application.
+    These provide styling for all pages. `layout.css` which contains styling for the footer, banner and the main background is kept separate in order not to clutter `styles.css` unnecessarily.
 
 
+### Miscellaneous
 
+* **.gitignore**
 
-## Other information:
-
+    List of files to be ignored by GitHub. Includes some generic Django files and my own sketchpad files which are not necessary for the application.
 
