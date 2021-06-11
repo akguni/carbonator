@@ -135,10 +135,10 @@ def bank(request):
 
     tree = (
         (total_trees >= 1) * (
-        f", which has the same effect as planting {total_trees:.1f} trees"
+        f", which has the same effect as growing {total_trees:.1f} tree seedlings for 10 years"
         )
         +(total_trees < 1 and total_trees > .01 and random.random() > 0.50) * (
-        f", which would have the same effect as planting a tree if {(1/total_trees - 1):.0f} other people who care about the future of our planet also did the same"
+        f". This would have the same effect as growing a tree seedling for 10 years if {(1/total_trees - 1):.0f} other people who care about the future of our planet also did the same"
         )
         +f"."
     )
@@ -198,15 +198,19 @@ def settings(request):
     
     try:
         settings = Cost.objects.get(user=request.user)
+        settings.money = float(request.POST["money"])
+        settings.moneyUnit = request.POST["money-unit"]
+        settings.co2e = float(request.POST["co2e"])
+        settings.trees = float(request.POST["trees"])
 
     except Cost.DoesNotExist:
-        settings = []
-        settings.user = request.user
-
-    settings.money = float(request.POST["money"])
-    settings.moneyUnit = request.POST["money-unit"]
-    settings.co2e = float(request.POST["co2e"])
-    settings.trees = float(request.POST["trees"])
+        settings = Cost(
+            user=request.user,
+            money=float(request.POST["money"]),
+            moneyUnit=request.POST["money-unit"],
+            co2e=float(request.POST["co2e"]),
+            trees=float(request.POST["trees"])
+        )
     settings.save()
     settings = setting_check(request.user)
     return render(request, "carbonator/settings.html", {
@@ -221,7 +225,8 @@ def setting_check(user):
         'money': 0.315,
         'moneyUnit': 'Euro',
         'co2e': 0.40,
-        'trees': 25e-4
+        # source: https://www.epa.gov/energy/greenhouse-gas-equivalencies-calculator
+        'trees': 0.01163
         }        
     }
 
