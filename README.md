@@ -124,7 +124,7 @@ Postgres credentials if needed:
 
 * **docker-compose-test.yml**
 
-    For testing the app in containers.
+    Use with this command to run the tests within containers `docker-compose -f docker-compose-test.yml up --abort-on-container-exit`.
 
 
 * **docker-compose-ci.yml**
