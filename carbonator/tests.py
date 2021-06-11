@@ -64,6 +64,7 @@ class SavingTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         topsaver = response.context["halloffame"][0]
         self.assertEqual(user, topsaver)
+        
 class SeleniumTestCase(StaticLiveServerTestCase):
 
     @classmethod

@@ -290,3 +290,4 @@ def register(request):
         return redirect('index')
     else:
         return render(request, "carbonator/register.html")
+        
