@@ -6,16 +6,20 @@ For the final project I decided to develop something that *I* would be intereste
 
 The underlying concept of a calculator and keeping a record of actions and their consequences can easily be adapted to many other scenarios, for example optimizing use of scarce resources by large teams in a business environment.
 
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=vMx8dcKjyPI" target="_blank"><img src="http://img.youtube.com/vi/vMx8dcKjyPI/0.jpg" 
+alt="Carbonaotr" width="240" height="180" border="10" /></a>
+
 # Carbonator
 
 Carbonator is a web app designed to help you combat climate change by reducing your own carbon footprint.
 
-It helps you find out how small actions, such as switching off a light bulb or tv all contribute to saving energy.
+It helps you find out how small actions, such as switching off a light bulb or TV all contribute to saving energy.
 
-We all know intuitively that we should use less energy but it is not always
-easy to comprehend, let alone explain to others, the individual and cumulative impact of each small action.
+We all know intuitively that we should use less energy, but it is not always
+easy to comprehend, let alone explain to others, the individual and cumulative impact of small behavior changes everyday.
 
-Carbonator helps quantify these impacts, putting them in perspective. That means using Carbonator, you can make better informed decisions about the trade-offs we all have to consider 
+Carbonator helps quantify these impacts, putting them into perspective. Thanks to Carbonator, you can make better informed decisions about the trade-offs we all have to consider 
 in our daily lives.
 
 It could also be used as an educational tool by teachers and parents to make abstract concepts of energy use and its monetary and environmental consequences more tangible.
@@ -242,4 +246,12 @@ Postgres credentials if needed:
 * **.gitignore**
 
     List of files to be ignored by GitHub. Includes some generic Django files and my own sketchpad files which are not necessary for the application.
+
+* **images/carbonator_main.png**
+* **images/carbonator_motivator.png**
+
+    Images for embedding into this readme document.
+
+
+
 
