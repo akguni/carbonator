@@ -30,7 +30,7 @@ All visitors are free to play around with the calculator and see how much energy
 
 If they register, they can "bank" a saving which presents them instantly with a congratulatory message with a random dimension: 
 
-<p align="center"><img src="images/carbonator_motivator.png" width="50%"></p>
+<p align="center"><img src="images/carbonator_motivator.png" width="80%"></p>
 
 Since the scale of savings can vary significantly, the message is constructed using some random elements to keep it meaningful and reduce repetition.
 
