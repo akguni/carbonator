@@ -6,10 +6,6 @@ For the final project I decided to develop something that *I* would be intereste
 
 The underlying concept of a calculator and keeping a record of actions and their consequences can easily be adapted to many other scenarios, for example optimizing use of scarce resources by large teams in a business environment.
 
-
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=vMx8dcKjyPI" target="_blank"><img src="http://img.youtube.com/vi/vMx8dcKjyPI/0.jpg" 
-alt="Carbonaotr" width="240" height="180" border="10" /></a>
-
 # Carbonator
 
 Carbonator is a web app designed to help you combat climate change by reducing your own carbon footprint.
@@ -106,6 +102,9 @@ Postgres credentials if needed:
 
 > password:                 carbonator
 
+
+<p align="center"><a href="http://www.youtube.com/watch?feature=player_embedded&v=vMx8dcKjyPI" target="_blank"><img src="http://img.youtube.com/vi/vMx8dcKjyPI/0.jpg" 
+alt="Youtube Video Link" width="240" height="180" border="10" /></a></p>
 
 ## List of files and their contents:
 
