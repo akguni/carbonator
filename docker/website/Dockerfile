@@ -6,10 +6,13 @@ WORKDIR /usr/src/app/
 RUN apt-get update && \
     apt-get install -y \
     postgresql-client \
-    chromium
+    chromium \
+    libpcre3 \
+    libpcre3-dev \
+    python-dev
 
 COPY . .
 
-RUN pip3 install -r requirements.txt
+RUN pip install -r requirements.txt
 
-EXPOSE 8000
+# EXPOSE 8080

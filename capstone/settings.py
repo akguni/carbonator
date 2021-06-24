@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '%&ey@n%m@_dla-6*gsjp)*z!+0jx@o!0)it%z2we77we!jn!r0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*','0.0.0.0', '127.0.0.1']
 
@@ -129,6 +129,7 @@ USE_THOUSAND_SEPARATOR = False
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 LOGIN_URL = 'login'
 

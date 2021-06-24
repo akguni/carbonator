@@ -2,3 +2,4 @@ Django
 psycopg2
 selenium
 chromedriver-binary==90.0.4430.24
+uwsgi

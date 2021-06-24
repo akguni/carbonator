@@ -15,32 +15,55 @@ x-app-variables: &app-variables
 services:
     website:
         build: ./docker/website
-        image: carbonator:latest
+        # image: carbonator:latest
         container_name: django_image
         command: >
             bash -c "
-            until PGPASSWORD="carbonator" psql -h "postgres" -U "carbonator" -c '\q';
-            do sleep 1;
-            done && 
             python manage.py migrate &&
-            python manage.py runserver 0.0.0.0:8000
+            python manage.py collectstatic --noinput &&
+            uwsgi capstone.ini
             "
-        volumes: *service-volumes
+        # volumes: *service-volumes
+        volumes:
+            - ./:/usr/src/app/:rw,cached
+            - static-volume:/usr/src/app/static
+
         environment: *app-variables
-        ports:
-            - "8000:8000"
+        expose:
+            - 8080
         
         depends_on:
-            - postgres
+            postgres:
+                condition: service_healthy
 
     postgres:
         image: postgres:latest
         container_name: postgres_image
         environment: *database-variables
 
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U carbonator"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+
         volumes:
             - db-data:/var/lib/postgresql/data
 
+    nginx:
+        build: ./docker/nginx
+        container_name: nginx_image
+        restart: always
+
+        volumes:
+            - static-volume:/usr/src/app/static
+            - ${PWD}/docker/nginx/conf/nginx.conf:/etc/nginx/conf.d/nginx.conf
+            
+        ports:
+            - 80:80
+        depends_on:
+                - website
+
 volumes:
     db-data:
-        
+    static-volume:

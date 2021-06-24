@@ -15,3 +15,4 @@ To Django
 random_saving_generator.py
 Makefile
 wait-for-postgres.sh
+examplenginx.conf
