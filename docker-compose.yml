@@ -4,13 +4,14 @@ x-service-volumes: &service-volumes
     - ./:/usr/src/app/:rw,cached
 
 x-database-variables: &database-variables
-    POSTGRES_DB: carbonator
-    POSTGRES_USER: carbonator
-    POSTGRES_PASSWORD: carbonator
+    POSTGRES_DB: ${POSTGRES_DB}
+    POSTGRES_USER: ${POSTGRES_USER}
+    POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
 
 x-app-variables: &app-variables
     <<: *database-variables
-    POSTGRES_HOST: postgres    
+    POSTGRES_HOST: postgres
+    SECRET_KEY: ${SECRET_KEY}
 
 services:
     website:
@@ -29,8 +30,8 @@ services:
             - static-volume:/usr/src/app/static
 
         environment: *app-variables
-        expose:
-            - 8080
+        # expose:
+        #    - 8080
         
         depends_on:
             postgres:
