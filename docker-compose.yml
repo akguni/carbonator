@@ -15,7 +15,7 @@ x-app-variables: &app-variables
 services:
     website:
         build: ./docker/website
-        # image: carbonator:latest
+        image: carbonator:latest
         container_name: django_image
         command: >
             bash -c "
@@ -37,6 +37,7 @@ services:
                 condition: service_healthy
 
     postgres:
+        build: ./docker/postgres
         image: postgres:latest
         container_name: postgres_image
         environment: *database-variables
@@ -57,7 +58,7 @@ services:
 
         volumes:
             - static-volume:/usr/src/app/static
-            - ${PWD}/docker/nginx/conf/nginx.conf:/etc/nginx/conf.d/nginx.conf
+ #           - ${PWD}/docker/nginx/conf/nginx.conf:/etc/nginx/conf.d/nginx.conf
             
         ports:
             - 8080:80
