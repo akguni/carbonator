@@ -1,7 +1,4 @@
-version: "3.7"
-
-x-service-volumes: &service-volumes
-    - ./:/usr/src/app/:rw,cached
+version: "3.9"
 
 x-database-variables: &database-variables
     POSTGRES_DB: ${POSTGRES_DB}
@@ -15,8 +12,12 @@ x-app-variables: &app-variables
 
 services:
     website:
-        build: ./docker/website
-        # image: carbonator:latest
+        build:
+            dockerfile: Dockerfile-website
+            context: .
+            args:
+                APP_HOME: ${APP_HOME}
+        image: carbonator:latest
         container_name: django_image
         command: >
             bash -c "
@@ -24,20 +25,19 @@ services:
             python manage.py collectstatic --noinput &&
             uwsgi capstone.ini
             "
-        # volumes: *service-volumes
         volumes:
-            - ./:/usr/src/app/:rw,cached
-            - static-volume:/usr/src/app/static
+            - static-volume:${APP_HOME}/static
 
         environment: *app-variables
-        # expose:
-        #    - 8080
         
         depends_on:
             postgres:
                 condition: service_healthy
 
     postgres:
+        build:
+            dockerfile: Dockerfile-postgres
+            context: .
         image: postgres:latest
         container_name: postgres_image
         environment: *database-variables
@@ -52,13 +52,15 @@ services:
             - db-data:/var/lib/postgresql/data
 
     nginx:
-        build: ./docker/nginx
+        build:
+            dockerfile: Dockerfile-nginx
+            context: .
+        image: nginx:latest
         container_name: nginx_image
         restart: always
 
         volumes:
-            - static-volume:/usr/src/app/static
-            - ${PWD}/docker/nginx/conf/nginx.conf:/etc/nginx/conf.d/nginx.conf
+            - static-volume:${APP_HOME}/static
             
         ports:
             - 8080:80

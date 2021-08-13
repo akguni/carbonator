@@ -1,0 +1,10 @@
+.git
+.env
+.cache
+
+.log
+.pot
+.pyc
+
+README.me
+images/
