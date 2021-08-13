@@ -13,4 +13,8 @@ RUN apt-get update && \
 
 COPY . .
 
-RUN pip install -r requirements.txt
+RUN chmod -R +rx /usr/src/app/static
+
+#COPY ./docker/website/requirements.txt ./docker/website/requirements.txt
+
+RUN pip install -r docker/website/requirements.txt

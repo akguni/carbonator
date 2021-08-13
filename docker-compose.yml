@@ -14,7 +14,9 @@ x-app-variables: &app-variables
 
 services:
     website:
-        build: ./docker/website
+        build:
+            dockerfile: ./docker/website/Dockerfile
+            context: .        
         image: carbonator:latest
         container_name: django_image
         command: >
@@ -25,7 +27,8 @@ services:
             "
         # volumes: *service-volumes
         volumes:
-            - ./:/usr/src/app/:rw,cached
+        # removing this gives manage.py error
+        #    - ./:/usr/src/app/:rw,cached
             - static-volume:/usr/src/app/static
 
         environment: *app-variables
