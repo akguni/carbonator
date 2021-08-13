@@ -1,7 +1,4 @@
-version: "3.7"
-
-x-service-volumes: &service-volumes
-    - ./:/usr/src/app/:rw,cached
+version: "3.9"
 
 x-database-variables: &database-variables
     POSTGRES_DB: carbonator
@@ -25,15 +22,10 @@ services:
             python manage.py collectstatic --noinput &&
             uwsgi capstone.ini
             "
-        # volumes: *service-volumes
         volumes:
-        # removing this gives manage.py error
-        #    - ./:/usr/src/app/:rw,cached
             - static-volume:/usr/src/app/static
 
         environment: *app-variables
-        expose:
-            - 8080
         
         depends_on:
             postgres:
@@ -61,7 +53,6 @@ services:
 
         volumes:
             - static-volume:/usr/src/app/static
- #           - ${PWD}/docker/nginx/conf/nginx.conf:/etc/nginx/conf.d/nginx.conf
             
         ports:
             - 8080:80
