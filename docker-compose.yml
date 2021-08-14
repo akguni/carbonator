@@ -8,7 +8,9 @@ x-database-variables: &database-variables
 x-app-variables: &app-variables
     <<: *database-variables
     SECRET_KEY: $SECRET_KEY
-    POSTGRES_HOST: postgres    
+    DEBUG: $DEBUG
+    ALLOWED_HOSTS: $ALLOWED_HOSTS
+    POSTGRES_HOST: postgres
 
 services:
     website:

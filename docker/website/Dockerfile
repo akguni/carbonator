@@ -20,10 +20,10 @@ RUN apt-get update && \
 
 COPY . .
 
-RUN chmod -R +rx /usr/src/app/static
-
 RUN pip install --upgrade pip -r docker/website/requirements.txt
 
 RUN chown -R $APP_USER:$APP_USER $APP_HOME
 
 USER $APP_USER
+
+RUN chmod -R +rx /usr/src/app/static
