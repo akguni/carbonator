@@ -1,0 +1,11 @@
+.git
+.env
+.cache
+
+.log
+.pot
+.pyc
+
+README.md
+images/
+.vscode/

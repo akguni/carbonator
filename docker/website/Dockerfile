@@ -2,8 +2,8 @@ FROM python:3
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED=1
-ENV APP_HOME=/usr/src/app/
-ENV APP_USER=appuser
+ARG APP_HOME
+ARG APP_USER
  
 RUN groupadd -r $APP_USER && \
     useradd -r -g $APP_USER -d $APP_HOME -s /sbin/nologin -c "Docker image user" $APP_USER
