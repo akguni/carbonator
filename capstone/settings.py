@@ -27,7 +27,7 @@ SECRET_KEY = '%&ey@n%m@_dla-6*gsjp)*z!+0jx@o!0)it%z2we77we!jn!r0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*','0.0.0.0', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -74,9 +74,9 @@ TEMPLATES = [
 WSGI_APPLICATION = 'capstone.wsgi.application'
 
 POSTGRES_HOST = os.environ.get('POSTGRES_HOST', default="localhost")
-POSTGRES_DB = os.environ.get('POSTGRES_DB', default="carbonator")
-POSTGRES_USER = os.environ.get('POSTGRES_USER', default="carbonator")
-POSTGRES_PASSWORD = os.environ.get('POSTGRES_PASSWORD', default="carbonator")
+POSTGRES_DB = os.environ.get('POSTGRES_DB')
+POSTGRES_USER = os.environ.get('POSTGRES_USER')
+POSTGRES_PASSWORD = os.environ.get('POSTGRES_PASSWORD')
 
 DATABASES = {
     'default': {
