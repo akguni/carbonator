@@ -1,16 +1,16 @@
-# Harvard CS50’s Web Programming with Python and JavaScript
-Final Project - Capstone
+# Save Energy with with Carbonator
+A Web App to help reduce your Carbon Footprin and fight Climate Change
 ---
 
-For the final project I decided to develop something that *I* would be interested to use myself. I habitually try not to leave lights unnecessarily on but until I developed this web app, I could not tell you what change a small action like this could achieve in terms of energy saving and more importantly in terms of **money** and **environmental impact**.
+I wrote this Web App as my Final Project for Web Programming Course offered by Harvard University.
+
+For this project, I decided to develop something that *I* would be interested to use myself. I habitually try not to leave lights unnecessarily on but until I developed this web app, I could not tell you what change a small action like this could achieve in terms of energy saving and more importantly in terms of **money** and **environmental impact**.
 
 The underlying concept of a calculator and keeping a record of actions and their consequences can easily be adapted to many other scenarios, for example optimizing use of scarce resources by large teams in a business environment.
 
 # Carbonator
 
-Carbonator is a web app designed to help you combat climate change by reducing your own carbon footprint.
-
-It helps you find out how small actions, such as switching off a light bulb or TV all contribute to saving energy.
+Carbonator helps you find out how small actions, such as switching off a light bulb or TV all contribute to saving energy.
 
 We all know intuitively that we should use less energy, but it is not always
 easy to comprehend, let alone explain to others, the individual and cumulative impact of small behavior changes everyday.
